@@ -1,6 +1,7 @@
 import { CUSTOM_ELEMENTS_SCHEMA, Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SwiperContainer, register } from 'swiper/element/bundle';
+import { Router } from '@angular/router';
 
 register();
 
@@ -49,7 +50,12 @@ export class HomeComponent {
     },
   ]
 
+  constructor(
+    private router: Router
+  ) { }
+
   viewDetails(info: infoType) {
+    this.router.navigate([info.title.toLowerCase(), 'list'])
     console.log(info);
   }
 }
