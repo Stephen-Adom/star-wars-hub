@@ -1,4 +1,4 @@
-<nav class="w-full bg-transparent fixed top-0 left-0 px-2 py-4 z-[2]">
+<nav class="w-full bg-transparent fixed top-0 left-0 px-2 py-4 z-10">
   <div
     class="container flex flex-col sm:flex-col md:flex-row items-center sm:items-center md:items-start justify-between mx-auto space-y-3"
   >
@@ -15,7 +15,12 @@
     </a>
 
     <div class="navigation-links flex gap-3 flex-row items-center">
-      <a href="" class="text-white text-base">
+      <a
+        [routerLink]="['/people/list']"
+        routerLinkActive="active"
+        href="javascript:;"
+        class="text-white text-base flex items-center gap-x-1 hover:text-yellow-600"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
