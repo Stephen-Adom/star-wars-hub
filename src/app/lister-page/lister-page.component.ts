@@ -1,17 +1,25 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { CommonModule, Location } from '@angular/common';
+import { CommonModule, Location, NgSwitch } from '@angular/common';
 import { Table, TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { AppState, getAllCharacters, getLoadingState } from 'src/shared/store/app.reducer';
+import {
+  AppState,
+  getAllCharacters,
+  getAllFilms,
+  getAllPlanets,
+  getAllSpecies,
+  getAllStarships,
+  getAllVehicles,
+  getLoadingState,
+} from 'src/shared/store/app.reducer';
 import { Store } from '@ngrx/store';
 import { AppApiActions } from 'src/shared/store/app.actions';
 import { LazyLoadEvent } from 'primeng/api';
 import { FilmType, PeopleType } from 'src/shared/data.types';
 import { format } from 'date-fns';
 import { BASE_URI } from 'src/shared/api.service';
-
 
 interface PageEvent {
   first: number;
@@ -55,8 +63,8 @@ const peopleHeader = [
     label: 'Gender',
     value: 'gender',
     type: 'string',
-  }
-]
+  },
+];
 
 const filmsHeader = [
   {
@@ -93,8 +101,8 @@ const filmsHeader = [
     label: 'Created At',
     value: 'created',
     type: 'date',
-  }
-]
+  },
+];
 
 const starshipHeader = [
   {
@@ -131,8 +139,8 @@ const starshipHeader = [
     label: 'Cargo Capacity',
     value: 'cargo_capacity',
     type: 'number',
-  }
-]
+  },
+];
 
 const vehicleHeader = [
   {
@@ -169,8 +177,8 @@ const vehicleHeader = [
     label: 'Cargo Capacity',
     value: 'cargo_capacity',
     type: 'number',
-  }
-]
+  },
+];
 
 const specieHeader = [
   {
@@ -207,8 +215,8 @@ const specieHeader = [
     label: 'Skin Colors',
     value: 'skin_colors',
     type: 'string',
-  }
-]
+  },
+];
 
 const planetHeader = [
   {
@@ -245,79 +253,158 @@ const planetHeader = [
     label: 'Gravity',
     value: 'gravity',
     type: 'number',
-  }
-]
+  },
+];
 
 @Component({
   selector: 'app-lister-page',
   standalone: true,
   imports: [CommonModule, TableModule, ButtonModule],
   templateUrl: './lister-page.component.html',
-  styleUrls: ['./lister-page.component.scss']
+  styleUrls: ['./lister-page.component.scss'],
 })
 export class ListerPageComponent implements OnInit, OnDestroy {
   @ViewChild('listTable') listTable!: Table;
   categoryList: any[] = [];
-  routeSubscription = new Subscription();
   category!: string | null;
   tableHeader: { label: string; value: string }[] = [];
   totalRecords: number = 11;
   loading = false;
   data: any[] = [];
+  routeSubscription = new Subscription();
   loadingSubscription = new Subscription();
+  dataSubscription = new Subscription();
 
   constructor(
     private store: Store<AppState>,
     private route: ActivatedRoute,
     private location: Location,
-    private router: Router,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
-    this.routeSubscription = this.route.paramMap.subscribe(data => {
+    this.routeSubscription = this.route.paramMap.subscribe((data) => {
       this.category = data.get('category');
 
       switch (this.category) {
         case 'people':
-          Object.assign(this.tableHeader, peopleHeader)
+          Object.assign(this.tableHeader, peopleHeader);
           break;
-        case 'films ':
-          Object.assign(this.tableHeader, filmsHeader)
+        case 'films':
+          Object.assign(this.tableHeader, filmsHeader);
           break;
-        case 'planets':
-          Object.assign(this.tableHeader, planetHeader)
+        case 'planet':
+          Object.assign(this.tableHeader, planetHeader);
           break;
         case 'species':
-          Object.assign(this.tableHeader, specieHeader)
+          Object.assign(this.tableHeader, specieHeader);
           break;
-        case 'starships':
-          Object.assign(this.tableHeader, starshipHeader)
+        case 'starship':
+          Object.assign(this.tableHeader, starshipHeader);
           break;
         case 'vehicles':
-          Object.assign(this.tableHeader, vehicleHeader)
+          Object.assign(this.tableHeader, vehicleHeader);
           break;
         default:
-          Object.assign(this.tableHeader, peopleHeader)
+          Object.assign(this.tableHeader, peopleHeader);
           break;
       }
-    })
+    });
 
-    this.loadingSubscription = this.store.select(getLoadingState).subscribe(state => {
-      this.loading = state;
-    })
+    this.loadingSubscription = this.store
+      .select(getLoadingState)
+      .subscribe((state) => {
+        this.loading = state;
+      });
 
-    this.store.select(getAllCharacters).subscribe(data => {
+    this.dataSubscription = this.store.select(getAllCharacters).subscribe((data) => {
       if (data) {
         this.totalRecords = data.count;
         this.data = data.results;
       }
-    })
+    });
+
+    this.dataSubscription = this.store.select(getAllFilms).subscribe((data) => {
+      if (data) {
+        this.totalRecords = data.count;
+        this.data = data.results;
+      }
+    });
+
+    this.dataSubscription = this.store.select(getAllPlanets).subscribe((data) => {
+      if (data) {
+        this.totalRecords = data.count;
+        this.data = data.results;
+      }
+    });
+
+    this.dataSubscription = this.store.select(getAllSpecies).subscribe((data) => {
+      if (data) {
+        this.totalRecords = data.count;
+        this.data = data.results;
+      }
+    });
+
+    this.dataSubscription = this.store.select(getAllStarships).subscribe((data) => {
+      if (data) {
+        this.totalRecords = data.count;
+        this.data = data.results;
+      }
+    });
+
+    this.dataSubscription = this.store.select(getAllVehicles).subscribe((data) => {
+      if (data) {
+        this.totalRecords = data.count;
+        this.data = data.results;
+      }
+    });
   }
 
   loadCustomers(event: LazyLoadEvent) {
-    const page = event.first! / event?.rows! + 1
-    this.store.dispatch(AppApiActions.toggleLoading({ state: true }));
-    this.store.dispatch(AppApiActions.fetchAllCharacters({ pageNumber: page }))
+    if (this.category) {
+      const page = event.first! / event?.rows! + 1;
+      this.store.dispatch(AppApiActions.toggleLoading({ state: true }));
+
+      switch (this.category) {
+        case 'people':
+          this.store.dispatch(
+            AppApiActions.fetchAllCharacters({ pageNumber: page })
+          );
+          break;
+        case 'films':
+          this.store.dispatch(
+            AppApiActions.fetchAllFilms({ pageNumber: page })
+          );
+          break;
+        case 'planet':
+          this.store.dispatch(
+            AppApiActions.fetchAllPlanets({ pageNumber: page })
+          );
+          break;
+        case 'species':
+          this.store.dispatch(
+            AppApiActions.fetchAllSpecies({ pageNumber: page })
+          );
+          break;
+        case 'starship':
+          this.store.dispatch(
+            AppApiActions.fetchAllStarships({ pageNumber: page })
+          );
+          break;
+        case 'vehicles':
+          this.store.dispatch(
+            AppApiActions.fetchAllVehicles({ pageNumber: page })
+          );
+          break;
+        default:
+          this.store.dispatch(
+            AppApiActions.fetchAllCharacters({ pageNumber: page })
+          );
+          break;
+      }
+
+
+    }
   }
 
   goBack() {
@@ -337,5 +424,7 @@ export class ListerPageComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.routeSubscription.unsubscribe();
     this.loadingSubscription.unsubscribe();
+    this.dataSubscription.unsubscribe();
+    this.store.dispatch(AppApiActions.clearData());
   }
 }

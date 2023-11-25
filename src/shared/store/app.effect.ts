@@ -27,4 +27,94 @@ export class AppEffects {
             )
         );
     });
+
+    FetchAllFilms$ = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(AppApiActions.fetchAllFilms),
+            mergeMap((action: { pageNumber: number }) =>
+                this.apiservice.fetchAllFilms(action.pageNumber).pipe(
+                    map((response) => {
+                        return AppApiActions.fetchAllFilmsSuccess({
+                            response,
+                        });
+                    }),
+                    catchError((error: HttpErrorResponse) =>
+                        of(AppApiActions.fetchAllFilmsFailure({ error: error.error }))
+                    ),
+                )
+            )
+        );
+    });
+
+    FetchAllPlanets$ = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(AppApiActions.fetchAllPlanets),
+            mergeMap((action: { pageNumber: number }) =>
+                this.apiservice.fetchAllPlanets(action.pageNumber).pipe(
+                    map((response) => {
+                        return AppApiActions.fetchAllPlanetsSuccess({
+                            response,
+                        });
+                    }),
+                    catchError((error: HttpErrorResponse) =>
+                        of(AppApiActions.fetchAllPlanetsFailure({ error: error.error }))
+                    ),
+                )
+            )
+        );
+    });
+
+    FetchAllSpecies$ = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(AppApiActions.fetchAllSpecies),
+            mergeMap((action: { pageNumber: number }) =>
+                this.apiservice.fetchAllSpecies(action.pageNumber).pipe(
+                    map((response) => {
+                        return AppApiActions.fetchAllSpeciesSuccess({
+                            response,
+                        });
+                    }),
+                    catchError((error: HttpErrorResponse) =>
+                        of(AppApiActions.fetchAllSpeciesFailure({ error: error.error }))
+                    ),
+                )
+            )
+        );
+    });
+
+    FetchAllStarships$ = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(AppApiActions.fetchAllStarships),
+            mergeMap((action: { pageNumber: number }) =>
+                this.apiservice.fetchAllStarships(action.pageNumber).pipe(
+                    map((response) => {
+                        return AppApiActions.fetchAllStarshipsSuccess({
+                            response,
+                        });
+                    }),
+                    catchError((error: HttpErrorResponse) =>
+                        of(AppApiActions.fetchAllStarshipsFailure({ error: error.error }))
+                    ),
+                )
+            )
+        );
+    });
+
+    FetchAllVehicles$ = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(AppApiActions.fetchAllVehicles),
+            mergeMap((action: { pageNumber: number }) =>
+                this.apiservice.fetchAllVehicles(action.pageNumber).pipe(
+                    map((response) => {
+                        return AppApiActions.fetchAllVehiclesSuccess({
+                            response,
+                        });
+                    }),
+                    catchError((error: HttpErrorResponse) =>
+                        of(AppApiActions.fetchAllVehiclesFailure({ error: error.error }))
+                    ),
+                )
+            )
+        );
+    });
 }
