@@ -8,5 +8,6 @@ export const AppApiActions = createActionGroup({
         'fetch All Characters': props<{ pageNumber: number }>(),
         'fetch ALL Characters Success': props<{ response: peopleResponseType }>(),
         'fetch ALL Characters Failure': props<{ error: HttpErrorResponse }>(),
+        'toggle loading': props<{ state: boolean }>()
     },
 });

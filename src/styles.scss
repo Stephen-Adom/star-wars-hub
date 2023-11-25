@@ -46,25 +46,15 @@ swiper-container {
 }
 
 swiper-slide {
-  height: 350px !important;
+  height: 400px !important;
   transform: translateY(15%);
 
-  .info-container .content {
-    opacity: 0;
-  }
-}
-
-swiper-slide.swiper-slide-active {
-  height: 450px !important;
-  transform: translateY(0);
-  z-index: 3;
-
   .info-container {
-    position: relative !important;
-    width: 700px !important;
-    z-index: 5 !important;
-    left: -152px !important;
-    border: 2px solid #444444;
+    // position: relative !important;
+    // width: 700px !important;
+    // z-index: 5 !important;
+    // left: -152px !important;
+    // border: 2px solid #444444;
 
     &::after {
       content: "";
@@ -85,6 +75,38 @@ swiper-slide.swiper-slide-active {
     }
   }
 }
+
+// swiper-slide.swiper-slide-active {
+//   height: 450px !important;
+//   transform: translateY(0);
+//   z-index: 3;
+
+//   .info-container {
+//     position: relative !important;
+//     width: 700px !important;
+//     z-index: 5 !important;
+//     left: -152px !important;
+//     border: 2px solid #444444;
+
+//     &::after {
+//       content: "";
+//       position: absolute;
+//       top: 0;
+//       left: 0;
+//       width: 100%;
+//       height: 100%;
+//       background-color: rgb(12 15 25 / 45%);
+//       z-index: 1;
+//     }
+
+//     .content {
+//       opacity: 1;
+//       position: relative;
+//       z-index: 2;
+//       bottom: 45px;
+//     }
+//   }
+// }
 
 .p-datatable .p-datatable-thead > tr > th {
   text-align: left;

@@ -41,12 +41,17 @@ export class HomeComponent {
     {
       image: 'assets/images/starship.jpg',
       title: 'Starship',
-      description: 'A Starship, within the Star Wars Universe, is not merely a vessel; it\'s a singular mode of transport with the remarkable ability to traverse the vastness of space using hyperdrive technology. These extraordinary spacecraft are at the heart of intergalactic adventures, each possessing its own design, capabilities, and stories waiting to be explored. Embark on a journey to uncover the captivating tales woven into the fabric of Star Wars Starships, where the possibilities are as infinite as the galaxies they navigate.'
+      description: 'A Starship, within the Star Wars Universe, is not merely a vessel; it\'s a singular mode of transport with the remarkable ability to traverse the vastness of space using hyperdrive technology. These extraordinary spacecraft are at the heart of intergalactic adventures, each possessing its own design, capabilities, and stories waiting to be explored.'
     },
     {
       image: 'assets/images/vehicles.jpg',
       title: 'Vehicles',
-      description: 'In the Star Wars Universe, a Vehicle stands as a singular transport craft, distinct from its hyperdrive-enabled counterparts. While it lacks the ability to traverse hyperspace, it plays a crucial role in various planetary adventures. These Vehicles showcase diverse designs and functionalities, contributing to the dynamic and immersive world of Star Wars. Explore the unique charm and practicality of these ground-based transports, each with its own character and purpose within the galaxy far, far away.'
+      description: 'In the Star Wars Universe, a Vehicle stands as a singular transport craft, distinct from its hyperdrive-enabled counterparts. While it lacks the ability to traverse hyperspace, it plays a crucial role in various planetary adventures. Explore the unique charm and practicality of these ground-based transports, each with its own character and purpose within the galaxy far, far away.'
+    },
+    {
+      image: 'assets/images/films.jpg',
+      title: 'Films',
+      description: 'A Star Wars film is not just a cinematic experience; it\'s a journey into an epic universe filled with timeless stories, iconic characters, and boundless imagination. Dive into the magic of a single Star Wars film, where every frame is a brushstroke painting a larger-than-life canvas of adventure, heroism, and the eternal battle between the forces of light and darkness.'
     },
   ]
 

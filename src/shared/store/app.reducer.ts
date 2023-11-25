@@ -8,11 +8,13 @@ export const featureAppKey = 'app';
 export interface AppState {
     error: HttpErrorResponse | null;
     allCharacters: peopleResponseType | null;
+    loading: boolean;
 }
 
 const initialState: AppState = {
     error: null,
-    allCharacters: null
+    allCharacters: null,
+    loading: false,
 };
 
 export const selectAppFeature = createFeatureSelector<AppState>(featureAppKey);
@@ -27,6 +29,11 @@ export const getAllCharacters = createSelector(
     (state: AppState) => state.allCharacters
 );
 
+export const getLoadingState = createSelector(
+    selectAppFeature,
+    (state: AppState) => state.loading
+);
+
 
 export const AppReducer = createReducer<AppState>(
     initialState,
@@ -34,13 +41,21 @@ export const AppReducer = createReducer<AppState>(
         return {
             ...state,
             allCharacters: action.response,
+            loading: false,
             error: null
         };
     }),
     on(AppApiActions.fetchAllCharactersFailure, (state: AppState, action) => {
         return {
             ...state,
+            loading: false,
             error: action.error
+        };
+    }),
+    on(AppApiActions.toggleLoading, (state: AppState, action) => {
+        return {
+            ...state,
+            loading: action.state,
         };
     }),
 );

@@ -4,7 +4,7 @@ import { Table, TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { AppState, getAllCharacters } from 'src/shared/store/app.reducer';
+import { AppState, getAllCharacters, getLoadingState } from 'src/shared/store/app.reducer';
 import { Store } from '@ngrx/store';
 import { AppApiActions } from 'src/shared/store/app.actions';
 import { LazyLoadEvent } from 'primeng/api';
@@ -264,6 +264,7 @@ export class ListerPageComponent implements OnInit, OnDestroy {
   totalRecords: number = 11;
   loading = false;
   data: any[] = [];
+  loadingSubscription = new Subscription();
 
   constructor(
     private store: Store<AppState>,
@@ -301,6 +302,10 @@ export class ListerPageComponent implements OnInit, OnDestroy {
       }
     })
 
+    this.loadingSubscription = this.store.select(getLoadingState).subscribe(state => {
+      this.loading = state;
+    })
+
     this.store.select(getAllCharacters).subscribe(data => {
       if (data) {
         this.totalRecords = data.count;
@@ -311,6 +316,7 @@ export class ListerPageComponent implements OnInit, OnDestroy {
 
   loadCustomers(event: LazyLoadEvent) {
     const page = event.first! / event?.rows! + 1
+    this.store.dispatch(AppApiActions.toggleLoading({ state: true }));
     this.store.dispatch(AppApiActions.fetchAllCharacters({ pageNumber: page }))
   }
 
@@ -330,5 +336,6 @@ export class ListerPageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.routeSubscription.unsubscribe();
+    this.loadingSubscription.unsubscribe();
   }
 }

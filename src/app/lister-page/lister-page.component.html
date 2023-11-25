@@ -54,13 +54,6 @@
         <tr>
           <ng-container *ngFor="let header of columns">
             <ng-container [ngSwitch]="header.type">
-              <ng-container *ngSwitchCase="'number'">
-                <td>
-                  {{
-                    info[header.value] ? (info[header.value] | number) : "N/A"
-                  }}
-                </td>
-              </ng-container>
               <ng-container *ngSwitchCase="'date'">
                 <td>
                   {{

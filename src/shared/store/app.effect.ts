@@ -22,7 +22,7 @@ export class AppEffects {
                     }),
                     catchError((error: HttpErrorResponse) =>
                         of(AppApiActions.fetchAllCharactersFailure({ error: error.error }))
-                    )
+                    ),
                 )
             )
         );
