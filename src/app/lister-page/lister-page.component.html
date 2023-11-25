@@ -24,27 +24,34 @@
     >
   </div>
 
-  <div class="text-white mt-5" *ngIf="category">
+  <div class="text-white mt-2" *ngIf="category">
     <p-table
+      #listTable
       [value]="data"
+      [lazy]="true"
+      (onLazyLoad)="loadCustomers($event)"
+      dataKey="name"
       [paginator]="true"
-      [rows]="5"
+      [rows]="10"
+      [totalRecords]="totalRecords"
+      [loading]="loading"
       [showCurrentPageReport]="true"
       [tableStyle]="{ 'min-width': '50rem' }"
-      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
       [rowsPerPageOptions]="[10, 25, 50]"
-      paginatorLocale="fa-IR"
+      [scrollable]="true"
+      scrollHeight="400px"
+      [columns]="tableHeader"
     >
-      <ng-template pTemplate="header">
-        <tr *ngIf="tableHeader.length">
-          <th style="width: auto" *ngFor="let header of tableHeader">
+      <ng-template pTemplate="header" let-columns>
+        <tr *ngIf="columns.length">
+          <th style="width: auto" *ngFor="let header of columns">
             {{ header.label }}
           </th>
         </tr>
       </ng-template>
-      <ng-template pTemplate="body" let-customer>
+      <ng-template pTemplate="body" let-customer let-columns="columns">
         <tr>
-          <ng-container *ngFor="let header of tableHeader">
+          <ng-container *ngFor="let header of columns">
             <td>{{ customer[header.value] }}</td>
           </ng-container>
         </tr>

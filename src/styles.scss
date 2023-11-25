@@ -93,7 +93,7 @@ swiper-slide.swiper-slide-next {
   border-width: 0 0 1px 0;
   font-weight: 700;
   color: #e5e4e4;
-  background: #0c0e1a;
+  background: #202223;
   transition: box-shadow 0.2s;
 }
 
@@ -115,4 +115,13 @@ swiper-slide.swiper-slide-next {
   border-width: 0;
   padding: 0.5rem 1rem;
   border-radius: 6px;
+}
+
+.p-datatable .p-datatable-header {
+  background: #262d30;
+  color: #343a40;
+  border: 1px solid #383939;
+  border-width: 1px 0 1px 0;
+  padding: 0.5rem 1rem;
+  font-weight: 700;
 }

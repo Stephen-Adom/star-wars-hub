@@ -11,6 +11,8 @@ import { ApiService } from 'src/shared/api.service';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { AppEffects } from 'src/shared/store/app.effect';
+import { AppReducer } from 'src/shared/store/app.reducer';
 
 @NgModule({
   declarations: [
@@ -23,8 +25,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     NavigationComponent,
     BrowserAnimationsModule,
     HttpClientModule,
-    StoreModule.forRoot({}, {}),
-    EffectsModule.forRoot([]),
+    StoreModule.forRoot({ app: AppReducer }),
+    EffectsModule.forRoot([AppEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() })
   ],
   providers: [
