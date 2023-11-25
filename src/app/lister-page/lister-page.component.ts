@@ -310,6 +310,13 @@ export class ListerPageComponent implements OnInit, OnDestroy {
           Object.assign(this.tableHeader, peopleHeader);
           break;
       }
+
+      this.lazyLoadData({
+        first: 0,
+        rows: 10,
+        sortField: 'name',
+        sortOrder: 1,
+      })
     });
 
     this.loadingSubscription = this.store
@@ -367,7 +374,8 @@ export class ListerPageComponent implements OnInit, OnDestroy {
     });
   }
 
-  loadCustomers(event: LazyLoadEvent) {
+  lazyLoadData(event: LazyLoadEvent) {
+    console.log(event);
     if (this.category) {
       const page = event.first! / event?.rows! + 1;
       this.store.dispatch(AppApiActions.toggleLoading({ state: true }));

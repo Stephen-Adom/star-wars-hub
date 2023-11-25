@@ -18,8 +18,7 @@
 
     <div class="navigation-links flex gap-3 flex-row items-center">
       <a
-        [routerLink]="['/people/list']"
-        routerLinkActive="active"
+        (click)="viewCharacters()"
         href="javascript:;"
         class="text-white text-base flex items-center gap-x-1 hover:text-yellow-600"
       >
