@@ -64,6 +64,7 @@ swiper-slide.swiper-slide-next {
     width: 700px !important;
     z-index: 5 !important;
     left: -152px !important;
+    border: 2px solid #444444;
 
     &::after {
       content: "";
