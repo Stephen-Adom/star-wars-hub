@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { filmsResponseType, peopleResponseType, planetResponseType, speciesResponseType, starshipResponseType, vehicleResponseType } from './data.types';
 
-const BASE_URI = 'https://swapi.dev/api/';
+export const BASE_URI = 'https://swapi.dev/api/';
 
 @Injectable({
     providedIn: 'root'

@@ -2,13 +2,15 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { Table, TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AppState, getAllCharacters } from 'src/shared/store/app.reducer';
 import { Store } from '@ngrx/store';
 import { AppApiActions } from 'src/shared/store/app.actions';
 import { LazyLoadEvent } from 'primeng/api';
 import { FilmType, PeopleType } from 'src/shared/data.types';
+import { format } from 'date-fns';
+import { BASE_URI } from 'src/shared/api.service';
 
 
 interface PageEvent {
@@ -267,6 +269,7 @@ export class ListerPageComponent implements OnInit, OnDestroy {
     private store: Store<AppState>,
     private route: ActivatedRoute,
     private location: Location,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -316,10 +319,12 @@ export class ListerPageComponent implements OnInit, OnDestroy {
   }
 
   formatDate(date: string) {
-    return date;
+    return format(new Date(date), 'PPP');
   }
 
   viewDetails(info: any) {
+    const id = info.url.split(BASE_URI + this.category + '/')[1].split('/')[0];
+    this.router.navigate([this.category, 'details', id]);
     console.log(info);
   }
 

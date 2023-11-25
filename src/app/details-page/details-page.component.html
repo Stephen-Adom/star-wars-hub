@@ -1,0 +1,202 @@
+<section class="relative z-[4] mt-[50px]">
+  <div
+    class="subheader w-full py-2 px-4 text-white flex items-center justify-between"
+  >
+    <h5 class="text-lg" *ngIf="category">{{ category | titlecase }} Details</h5>
+
+    <a href="javascript:;" (click)="goBack()" class="flex items-center gap-x-1">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="w-4 h-4"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18"
+        />
+      </svg>
+
+      Back</a
+    >
+  </div>
+
+  <section
+    class="text-white mt-2 min-h-[250px] bg-[#0c0e1a] rounded-lg grid grid-cols-[70%_30%] gap-4 bg-cover bg-center bg-no-repeat"
+    *ngIf="category"
+    [ngStyle]="{
+      'background-image': 'url(assets/images/' + category + '.jpg)'
+    }"
+  >
+    <section class="p-4">
+      <h1 class="text-3xl font-bold">Category Name</h1>
+      <div class="flex items-center flex-wrap gap-3 mt-2">
+        <span class="text-sm"
+          >Gender: <span class="text-yellow-600">Male</span></span
+        >
+        <span class="text-sm">Eye Color: Red</span>
+        <span class="text-sm">Hair Color: Red</span>
+        <span class="text-sm">Birth Year: Red</span>
+        <span class="text-sm">Height: Red</span>
+        <span class="text-sm">Skin Color: Red</span>
+      </div>
+
+      <section class="mt-3">
+        <h6 class="mb-3 italic">Homeworld Info:</h6>
+
+        <div class="grid grid-cols-5 gap-3 ml-4">
+          <div>
+            <span class="block text-sm">Name:</span>
+            <span class="block text-sm text-yellow-600">Tatooine</span>
+          </div>
+
+          <div>
+            <span class="block text-sm">Population:</span>
+            <span class="block text-sm text-yellow-600">Tatooine</span>
+          </div>
+
+          <div>
+            <span class="block text-sm">Gravity:</span>
+            <span class="block text-sm text-yellow-600">Tatooine</span>
+          </div>
+
+          <div>
+            <span class="block text-sm">Climate:</span>
+            <span class="block text-sm text-yellow-600">Tatooine</span>
+          </div>
+
+          <div>
+            <span class="block text-sm">Terrain:</span>
+            <span class="block text-sm text-yellow-600">Tatooine</span>
+          </div>
+
+          <div>
+            <span class="block text-sm">Orbital Period:</span>
+            <span class="block text-sm text-yellow-600">Tatooine</span>
+          </div>
+
+          <div>
+            <span class="block text-sm">No of resident:</span>
+            <span class="block text-sm text-yellow-600">Tatooine</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="mt-3">
+        <h6 class="mb-3 italic">Species Info:</h6>
+
+        <div class="grid grid-cols-2 gap-3 ml-4">
+          <div class="border border-gray-600 rounded-md p-3">
+            <h6 class="text-sm font-semibold">Species Name</h6>
+
+            <div class="grid grid-cols-2 gap-2 mt-2">
+              <div>
+                <span class="block text-sm">Classification:</span>
+                <span class="block text-sm text-gray-400">Tatooine</span>
+              </div>
+
+              <div>
+                <span class="block text-sm">Average Height:</span>
+                <span class="block text-sm text-gray-400">Tatooine</span>
+              </div>
+
+              <div>
+                <span class="block text-sm">Average Lifespan:</span>
+                <span class="block text-sm text-gray-400">Tatooine</span>
+              </div>
+
+              <div>
+                <span class="block text-sm">Language:</span>
+                <span class="block text-sm text-gray-400">Tatooine</span>
+              </div>
+
+              <div>
+                <span class="block text-sm">Skin colors:</span>
+                <span class="block text-sm text-gray-400">Tatooine</span>
+              </div>
+              <div>
+                <span class="block text-sm">Hair colors:</span>
+                <span class="block text-sm text-gray-400">Tatooine</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="mt-3">
+        <h6 class="mb-3 italic">Starship Info:</h6>
+
+        <div class="grid grid-cols-2 gap-3 ml-4">
+          <div class="border border-gray-600 rounded-md p-3">
+            <h6 class="text-sm font-semibold">Species Name</h6>
+
+            <div class="grid grid-cols-2 gap-2 mt-2">
+              <div>
+                <span class="block text-sm">Model:</span>
+                <span class="block text-sm text-gray-400">Tatooine</span>
+              </div>
+
+              <div>
+                <span class="block text-sm">Manufacturer:</span>
+                <span class="block text-sm text-gray-400">Tatooine</span>
+              </div>
+
+              <div>
+                <span class="block text-sm">Starship class:</span>
+                <span class="block text-sm text-gray-400">Tatooine</span>
+              </div>
+
+              <div>
+                <span class="block text-sm">Passengers:</span>
+                <span class="block text-sm text-gray-400">Tatooine</span>
+              </div>
+
+              <div>
+                <span class="block text-sm">Hyperdrive Rating:</span>
+                <span class="block text-sm text-gray-400">Tatooine</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="mt-3">
+        <h6 class="mb-3 italic">Vehicle Info:</h6>
+
+        <div class="grid grid-cols-2 gap-3 ml-4">
+          <div class="border border-gray-600 rounded-md p-3">
+            <h6 class="text-sm font-semibold">Vehicle Name</h6>
+
+            <div class="grid grid-cols-2 gap-2 mt-2">
+              <div>
+                <span class="block text-sm">Model:</span>
+                <span class="block text-sm text-gray-400">Tatooine</span>
+              </div>
+
+              <div>
+                <span class="block text-sm">Manufacturer:</span>
+                <span class="block text-sm text-gray-400">Tatooine</span>
+              </div>
+
+              <div>
+                <span class="block text-sm">Vehicle class:</span>
+                <span class="block text-sm text-gray-400">Tatooine</span>
+              </div>
+
+              <div>
+                <span class="block text-sm">Passengers:</span>
+                <span class="block text-sm text-gray-400">Tatooine</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+    <div></div>
+  </section>
+</section>
+
+<ng-template #peopleHeader> </ng-template>
