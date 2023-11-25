@@ -1,84 +1,77 @@
-<section class="grid grid-cols-[40%_60%]">
+<section class="grid grid-cols-[40%_60%]" *ngIf="planetDetails">
   <div></div>
   <section class="p-10 relative z-[3] mt-5">
-    <h1 class="text-3xl font-bold">Category Name</h1>
+    <h1 class="text-3xl font-bold">{{ planetDetails.name }}</h1>
 
     <div class="grid grid-cols-3 gap-2 mt-2">
       <div>
         <span class="block text-sm">Rotation Period:</span>
-        <span class="block text-sm text-gray-400">Tatooine</span>
+        <span class="block text-sm text-yellow-600">{{
+          planetDetails.rotation_period
+        }}</span>
       </div>
 
       <div>
         <span class="block text-sm">Orbital Period:</span>
-        <span class="block text-sm text-gray-400">Tatooine</span>
+        <span class="block text-sm text-yellow-600">{{
+          planetDetails.orbital_period
+        }}</span>
       </div>
 
       <div>
         <span class="block text-sm">Diameter:</span>
-        <span class="block text-sm text-gray-400">Tatooine</span>
+        <span class="block text-sm text-yellow-600">{{
+          planetDetails.diameter | number
+        }}</span>
       </div>
 
       <div>
         <span class="block text-sm">Climate:</span>
-        <span class="block text-sm text-gray-400">Tatooine</span>
+        <span class="block text-sm text-yellow-600">{{
+          planetDetails.climate
+        }}</span>
       </div>
 
       <div>
         <span class="block text-sm">Gravity:</span>
-        <span class="block text-sm text-gray-400">Tatooine</span>
+        <span class="block text-sm text-yellow-600">{{
+          planetDetails.gravity
+        }}</span>
       </div>
 
       <div>
         <span class="block text-sm">Terrain:</span>
-        <span class="block text-sm text-gray-400">Tatooine</span>
+        <span class="block text-sm text-yellow-600">{{
+          planetDetails.terrain
+        }}</span>
       </div>
 
       <div>
         <span class="block text-sm">Surface Water:</span>
-        <span class="block text-sm text-gray-400">Tatooine</span>
+        <span class="block text-sm text-yellow-600">{{
+          planetDetails.surface_water
+        }}</span>
       </div>
       <div>
         <span class="block text-sm">Population:</span>
-        <span class="block text-sm text-gray-400">Tatooine</span>
+        <span class="block text-sm text-yellow-600">{{
+          planetDetails.population | number
+        }}</span>
+      </div>
+
+      <div>
+        <span class="block text-sm">No of films:</span>
+        <span class="block text-sm text-yellow-600">{{
+          planetDetails.films.length
+        }}</span>
+      </div>
+
+      <div>
+        <span class="block text-sm">No of residents:</span>
+        <span class="block text-sm text-yellow-600">{{
+          planetDetails.residents.length
+        }}</span>
       </div>
     </div>
-
-    <section class="mt-3">
-      <h6 class="mb-3 italic">Starship Info:</h6>
-
-      <div class="grid grid-cols-2 gap-3 ml-4">
-        <div class="border border-gray-600 rounded-md p-3">
-          <h6 class="text-sm font-semibold">Species Name</h6>
-
-          <div class="grid grid-cols-2 gap-2 mt-2">
-            <div>
-              <span class="block text-sm">Model:</span>
-              <span class="block text-sm text-gray-400">Tatooine</span>
-            </div>
-
-            <div>
-              <span class="block text-sm">Manufacturer:</span>
-              <span class="block text-sm text-gray-400">Tatooine</span>
-            </div>
-
-            <div>
-              <span class="block text-sm">Starship class:</span>
-              <span class="block text-sm text-gray-400">Tatooine</span>
-            </div>
-
-            <div>
-              <span class="block text-sm">Passengers:</span>
-              <span class="block text-sm text-gray-400">Tatooine</span>
-            </div>
-
-            <div>
-              <span class="block text-sm">Hyperdrive Rating:</span>
-              <span class="block text-sm text-gray-400">Tatooine</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
   </section>
 </section>

@@ -1,92 +1,67 @@
-<section class="grid grid-cols-[40%_60%]">
+<section class="grid grid-cols-[40%_60%]" *ngIf="vehicleDetails">
   <div></div>
   <section class="p-4 relative z-[3] mt-5">
-    <h1 class="text-3xl font-bold">Category Name</h1>
+    <h1 class="text-3xl font-bold">{{ vehicleDetails.name }}</h1>
 
     <div class="grid grid-cols-3 gap-2 mt-2">
       <div>
         <span class="block text-sm">Model:</span>
-        <span class="block text-sm text-gray-400">Tatooine</span>
+        <span class="block text-sm text-yellow-600">{{
+          vehicleDetails.model
+        }}</span>
       </div>
 
       <div>
         <span class="block text-sm">Vehicle Class:</span>
-        <span class="block text-sm text-gray-400">Tatooine</span>
+        <span class="block text-sm text-yellow-600">{{
+          vehicleDetails.vehicle_class
+        }}</span>
       </div>
 
       <div>
         <span class="block text-sm">Manufacturer:</span>
-        <span class="block text-sm text-gray-400">Tatooine</span>
+        <span class="block text-sm text-yellow-600">{{
+          vehicleDetails.manufacturer
+        }}</span>
       </div>
 
       <div>
         <span class="block text-sm">Cost in Credits:</span>
-        <span class="block text-sm text-gray-400">Tatooine</span>
+        <span class="block text-sm text-yellow-600">{{
+          vehicleDetails.cost_in_credits
+        }}</span>
       </div>
 
       <div>
         <span class="block text-sm">Length:</span>
-        <span class="block text-sm text-gray-400">Tatooine</span>
+        <span class="block text-sm text-yellow-600">{{
+          vehicleDetails.length
+        }}</span>
       </div>
 
       <div>
-        <span class="block text-sm">Max Stmosphering Speed:</span>
-        <span class="block text-sm text-gray-400">Tatooine</span>
+        <span class="block text-sm">Max Atmosphering Speed:</span>
+        <span class="block text-sm text-yellow-600">{{
+          vehicleDetails.manufacturer
+        }}</span>
       </div>
 
       <div>
         <span class="block text-sm">Cargo Capacity:</span>
-        <span class="block text-sm text-gray-400">Tatooine</span>
+        <span class="block text-sm text-yellow-600">{{
+          vehicleDetails.cargo_capacity
+        }}</span>
       </div>
       <div>
         <span class="block text-sm">Consumables:</span>
-        <span class="block text-sm text-gray-400">Tatooine</span>
+        <span class="block text-sm text-yellow-600">{{
+          vehicleDetails.consumables
+        }}</span>
       </div>
       <div>
         <span class="block text-sm">No of films:</span>
-        <span class="block text-sm text-gray-400">Tatooine</span>
+        <span class="block text-sm text-yellow-600">Tatooine</span>
       </div>
     </div>
-
-    <section class="mt-3">
-      <h6 class="mb-3 italic">Homeworld Info:</h6>
-
-      <div class="grid grid-cols-5 gap-3">
-        <div>
-          <span class="block text-sm">Name:</span>
-          <span class="block text-sm text-yellow-600">Tatooine</span>
-        </div>
-
-        <div>
-          <span class="block text-sm">Population:</span>
-          <span class="block text-sm text-yellow-600">Tatooine</span>
-        </div>
-
-        <div>
-          <span class="block text-sm">Gravity:</span>
-          <span class="block text-sm text-yellow-600">Tatooine</span>
-        </div>
-
-        <div>
-          <span class="block text-sm">Climate:</span>
-          <span class="block text-sm text-yellow-600">Tatooine</span>
-        </div>
-
-        <div>
-          <span class="block text-sm">Terrain:</span>
-          <span class="block text-sm text-yellow-600">Tatooine</span>
-        </div>
-
-        <div>
-          <span class="block text-sm">Orbital Period:</span>
-          <span class="block text-sm text-yellow-600">Tatooine</span>
-        </div>
-
-        <div>
-          <span class="block text-sm">No of resident:</span>
-          <span class="block text-sm text-yellow-600">Tatooine</span>
-        </div>
-      </div>
-    </section>
   </section>
 </section>

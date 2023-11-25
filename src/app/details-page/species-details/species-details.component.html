@@ -1,55 +1,134 @@
-<section class="grid grid-cols-[40%_60%]">
+<section class="grid grid-cols-[40%_60%]" *ngIf="speciesDetails">
   <div></div>
   <section class="p-4 relative z-[3] mt-5">
-    <h1 class="text-3xl font-bold">Category Name</h1>
+    <h1 class="text-3xl font-bold">{{ speciesDetails.name }}</h1>
 
     <div class="grid grid-cols-3 gap-2 mt-2">
       <div>
         <span class="block text-sm">Classification:</span>
-        <span class="block text-sm text-gray-400">Tatooine</span>
+        <span class="block text-sm text-yellow-600">{{
+          speciesDetails.classification
+        }}</span>
       </div>
 
       <div>
         <span class="block text-sm">Designation:</span>
-        <span class="block text-sm text-gray-400">Tatooine</span>
+        <span class="block text-sm text-yellow-600">{{
+          speciesDetails.designation
+        }}</span>
       </div>
 
       <div>
         <span class="block text-sm">Average Height:</span>
-        <span class="block text-sm text-gray-400">Tatooine</span>
+        <span class="block text-sm text-yellow-600">{{
+          speciesDetails.average_height
+        }}</span>
       </div>
 
       <div>
         <span class="block text-sm">Skin Colors:</span>
-        <span class="block text-sm text-gray-400">Tatooine</span>
+        <span class="block text-sm text-yellow-600">{{
+          speciesDetails.skin_colors
+        }}</span>
       </div>
 
       <div>
         <span class="block text-sm">Hair Colors:</span>
-        <span class="block text-sm text-gray-400">Tatooine</span>
+        <span class="block text-sm text-yellow-600">{{
+          speciesDetails.hair_colors
+        }}</span>
       </div>
 
       <div>
         <span class="block text-sm">Eye Colors:</span>
-        <span class="block text-sm text-gray-400">Tatooine</span>
+        <span class="block text-sm text-yellow-600">{{
+          speciesDetails.eye_colors
+        }}</span>
       </div>
 
       <div>
         <span class="block text-sm">Average Lifespan:</span>
-        <span class="block text-sm text-gray-400">Tatooine</span>
+        <span class="block text-sm text-yellow-600">{{
+          speciesDetails.average_lifespan
+        }}</span>
       </div>
       <div>
         <span class="block text-sm">Language:</span>
-        <span class="block text-sm text-gray-400">Tatooine</span>
+        <span class="block text-sm text-yellow-600">{{
+          speciesDetails.language
+        }}</span>
       </div>
       <div>
         <span class="block text-sm">No of films:</span>
-        <span class="block text-sm text-gray-400">Tatooine</span>
+        <span class="block text-sm text-yellow-600">{{
+          speciesDetails.films.length
+        }}</span>
       </div>
       <div>
         <span class="block text-sm">No of people:</span>
-        <span class="block text-sm text-gray-400">Tatooine</span>
+        <span class="block text-sm text-yellow-600">{{
+          speciesDetails.people.length
+        }}</span>
       </div>
     </div>
+
+    <hr
+      class="my-3 h-px border-t-0 bg-transparent bg-gradient-to-r from-transparent via-neutral-500 to-transparent opacity-25 dark:opacity-100"
+    />
+
+    <section class="" *ngIf="homeWorldDetails">
+      <h6 class="mb-3 italic">Homeworld Info:</h6>
+
+      <div class="grid grid-cols-5 gap-3">
+        <div>
+          <span class="block text-sm">Name:</span>
+          <span class="block text-sm text-yellow-600">{{
+            homeWorldDetails.name
+          }}</span>
+        </div>
+
+        <div>
+          <span class="block text-sm">Population:</span>
+          <span class="block text-sm text-yellow-600">{{
+            homeWorldDetails.population | number
+          }}</span>
+        </div>
+
+        <div>
+          <span class="block text-sm">Gravity:</span>
+          <span class="block text-sm text-yellow-600">{{
+            homeWorldDetails.gravity
+          }}</span>
+        </div>
+
+        <div>
+          <span class="block text-sm">Climate:</span>
+          <span class="block text-sm text-yellow-600">{{
+            homeWorldDetails.climate
+          }}</span>
+        </div>
+
+        <div>
+          <span class="block text-sm">Terrain:</span>
+          <span class="block text-sm text-yellow-600">{{
+            homeWorldDetails.terrain
+          }}</span>
+        </div>
+
+        <div>
+          <span class="block text-sm">Orbital Period:</span>
+          <span class="block text-sm text-yellow-600">{{
+            homeWorldDetails.orbital_period
+          }}</span>
+        </div>
+
+        <div>
+          <span class="block text-sm">No of resident:</span>
+          <span class="block text-sm text-yellow-600">{{
+            homeWorldDetails.residents.length
+          }}</span>
+        </div>
+      </div>
+    </section>
   </section>
 </section>

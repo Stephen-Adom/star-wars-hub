@@ -224,6 +224,34 @@ export const AppReducer = createReducer<AppState>(
         };
     }),
 
+    on(AppApiActions.displayPlanetDetails, (state: AppState, action) => {
+        return {
+            ...state,
+            planetDetail: action.planet
+        };
+    }),
+
+    on(AppApiActions.displaySpeciesDetails, (state: AppState, action) => {
+        return {
+            ...state,
+            speciesDetail: action.species
+        };
+    }),
+
+    on(AppApiActions.displayStarshipDetails, (state: AppState, action) => {
+        return {
+            ...state,
+            starshipDetail: action.starship
+        };
+    }),
+
+    on(AppApiActions.displayVehicleDetails, (state: AppState, action) => {
+        return {
+            ...state,
+            vehicleDetail: action.vehicle
+        };
+    }),
+
     on(AppApiActions.toggleLoading, (state: AppState, action) => {
         return {
             ...state,

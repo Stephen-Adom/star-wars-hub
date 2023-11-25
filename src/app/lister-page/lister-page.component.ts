@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { CommonModule, Location, NgSwitch } from '@angular/common';
 import { Table, TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
@@ -276,6 +276,7 @@ export class ListerPageComponent implements OnInit, OnDestroy {
   dataSubscription = new Subscription();
 
   constructor(
+    private cdr: ChangeDetectorRef,
     private store: Store<AppState>,
     private route: ActivatedRoute,
     private location: Location,
@@ -293,13 +294,13 @@ export class ListerPageComponent implements OnInit, OnDestroy {
         case 'films':
           Object.assign(this.tableHeader, filmsHeader);
           break;
-        case 'planet':
+        case 'planets':
           Object.assign(this.tableHeader, planetHeader);
           break;
         case 'species':
           Object.assign(this.tableHeader, specieHeader);
           break;
-        case 'starship':
+        case 'starships':
           Object.assign(this.tableHeader, starshipHeader);
           break;
         case 'vehicles':
@@ -321,6 +322,7 @@ export class ListerPageComponent implements OnInit, OnDestroy {
       if (data) {
         this.totalRecords = data.count;
         this.data = data.results;
+        this.cdr.detectChanges();
       }
     });
 
@@ -328,6 +330,7 @@ export class ListerPageComponent implements OnInit, OnDestroy {
       if (data) {
         this.totalRecords = data.count;
         this.data = data.results;
+        this.cdr.detectChanges();
       }
     });
 
@@ -335,6 +338,7 @@ export class ListerPageComponent implements OnInit, OnDestroy {
       if (data) {
         this.totalRecords = data.count;
         this.data = data.results;
+        this.cdr.detectChanges();
       }
     });
 
@@ -342,6 +346,7 @@ export class ListerPageComponent implements OnInit, OnDestroy {
       if (data) {
         this.totalRecords = data.count;
         this.data = data.results;
+        this.cdr.detectChanges();
       }
     });
 
@@ -349,6 +354,7 @@ export class ListerPageComponent implements OnInit, OnDestroy {
       if (data) {
         this.totalRecords = data.count;
         this.data = data.results;
+        this.cdr.detectChanges();
       }
     });
 
@@ -356,6 +362,7 @@ export class ListerPageComponent implements OnInit, OnDestroy {
       if (data) {
         this.totalRecords = data.count;
         this.data = data.results;
+        this.cdr.detectChanges();
       }
     });
   }
@@ -376,7 +383,7 @@ export class ListerPageComponent implements OnInit, OnDestroy {
             AppApiActions.fetchAllFilms({ pageNumber: page })
           );
           break;
-        case 'planet':
+        case 'planets':
           this.store.dispatch(
             AppApiActions.fetchAllPlanets({ pageNumber: page })
           );
@@ -386,7 +393,7 @@ export class ListerPageComponent implements OnInit, OnDestroy {
             AppApiActions.fetchAllSpecies({ pageNumber: page })
           );
           break;
-        case 'starship':
+        case 'starships':
           this.store.dispatch(
             AppApiActions.fetchAllStarships({ pageNumber: page })
           );
@@ -427,7 +434,7 @@ export class ListerPageComponent implements OnInit, OnDestroy {
           AppApiActions.displayFilmDetails({ film: info })
         );
         break;
-      case 'planet':
+      case 'planets':
         this.store.dispatch(
           AppApiActions.displayPlanetDetails({ planet: info })
         );
@@ -437,7 +444,7 @@ export class ListerPageComponent implements OnInit, OnDestroy {
           AppApiActions.displaySpeciesDetails({ species: info })
         );
         break;
-      case 'starship':
+      case 'starships':
         this.store.dispatch(
           AppApiActions.displayStarshipDetails({ starship: info })
         );
@@ -462,6 +469,5 @@ export class ListerPageComponent implements OnInit, OnDestroy {
     this.routeSubscription.unsubscribe();
     this.loadingSubscription.unsubscribe();
     this.dataSubscription.unsubscribe();
-    this.store.dispatch(AppApiActions.clearData());
   }
 }

@@ -29,8 +29,8 @@ export class HomeComponent {
       description: 'Explore an intriguing array of iconic personalities and characters that inhabit the vast Star Wars universe.'
     },
     {
-      image: 'assets/images/planet.jpg',
-      title: 'Planet',
+      image: 'assets/images/planets.jpg',
+      title: 'Planets',
       description: 'A celestial body, encompassing planets, large masses, and planetoids, adds depth and complexity to the expansive Star Wars Universe. Discover the rich tapestry of worlds, each with its own unique characteristics, landscapes, and significance within the overarching narrative of the Star Wars saga.'
     },
     {
@@ -39,8 +39,8 @@ export class HomeComponent {
       description: 'A Species in the Star Wars Universe represents a diverse array of sentient beings, each possessing its own distinctive characteristics, cultures, and histories. Delve into the fascinating world of Star Wars Species, where the richness of the galaxy unfolds through a myriad of unique individuals, contributing to the tapestry of this beloved universe.'
     },
     {
-      image: 'assets/images/starship.jpg',
-      title: 'Starship',
+      image: 'assets/images/starships.jpg',
+      title: 'Starships',
       description: 'A Starship, within the Star Wars Universe, is not merely a vessel; it\'s a singular mode of transport with the remarkable ability to traverse the vastness of space using hyperdrive technology. These extraordinary spacecraft are at the heart of intergalactic adventures, each possessing its own design, capabilities, and stories waiting to be explored.'
     },
     {
@@ -61,6 +61,5 @@ export class HomeComponent {
 
   viewDetails(info: infoType) {
     this.router.navigate([info.title.toLowerCase(), 'list'])
-    console.log(info);
   }
 }
