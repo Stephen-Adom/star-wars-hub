@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { filmsResponseType, peopleResponseType, planetResponseType, speciesResponseType, starshipResponseType, vehicleResponseType } from './data.types';
 
 const BASE_URI = 'https://swapi.dev/api/';
 
@@ -11,27 +12,27 @@ export class ApiService {
         private http: HttpClient
     ) { }
 
-    fetchAllPeople() {
-        return this.http.get<any>(BASE_URI + 'people')
+    fetchAllPeople(pageNumber = 1) {
+        return this.http.get<peopleResponseType>(BASE_URI + `people?page=${pageNumber}`)
     }
 
-    fetchAllFilms() {
-        return this.http.get<any>(BASE_URI + 'films')
+    fetchAllFilms(pageNumber = 1) {
+        return this.http.get<filmsResponseType>(BASE_URI + `films?page=${pageNumber}`)
     }
 
-    fetchAllPlanets() {
-        return this.http.get<any>(BASE_URI + 'planets')
+    fetchAllPlanets(pageNumber = 1) {
+        return this.http.get<planetResponseType>(BASE_URI + `planets?page=${pageNumber}`)
     }
 
-    fetchAllSpecies() {
-        return this.http.get<any>(BASE_URI + 'species')
+    fetchAllSpecies(pageNumber = 1) {
+        return this.http.get<speciesResponseType>(BASE_URI + `species?page=${pageNumber}`)
     }
 
-    fetchAllStarships() {
-        return this.http.get<any>(BASE_URI + 'starships')
+    fetchAllStarships(pageNumber = 1) {
+        return this.http.get<starshipResponseType>(BASE_URI + `starships?page=${pageNumber}`)
     }
 
-    fetchAllVehicles() {
-        return this.http.get<any>(BASE_URI + 'vehicles')
+    fetchAllVehicles(pageNumber = 1) {
+        return this.http.get<vehicleResponseType>(BASE_URI + `vehicles?page=${pageNumber}`)
     }
 }

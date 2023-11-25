@@ -108,3 +108,45 @@ export type PlanetType = {
     terrain: string;
     url: string;
 }
+
+export type peopleResponseType = {
+    count: number;
+    next: string;
+    previous: string | null;
+    results: PeopleType[]
+}
+
+export type filmsResponseType = {
+    count: number;
+    next: string;
+    previous: string | null;
+    results: FilmType[]
+}
+
+export type starshipResponseType = {
+    count: number;
+    next: string;
+    previous: string | null;
+    results: StarshipType[]
+}
+
+export type vehicleResponseType = {
+    count: number;
+    next: string;
+    previous: string | null;
+    results: VehicleType[]
+}
+
+export type speciesResponseType = {
+    count: number;
+    next: string;
+    previous: string | null;
+    results: SpeciesType[]
+}
+
+export type planetResponseType = {
+    count: number;
+    next: string;
+    previous: string | null;
+    results: PlanetType[]
+}
