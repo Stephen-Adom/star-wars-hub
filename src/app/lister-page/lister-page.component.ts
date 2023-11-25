@@ -416,6 +416,43 @@ export class ListerPageComponent implements OnInit, OnDestroy {
   }
 
   viewDetails(info: any) {
+    switch (this.category) {
+      case 'people':
+        this.store.dispatch(
+          AppApiActions.displayCharacterDetails({ character: info })
+        );
+        break;
+      case 'films':
+        this.store.dispatch(
+          AppApiActions.displayFilmDetails({ film: info })
+        );
+        break;
+      case 'planet':
+        this.store.dispatch(
+          AppApiActions.displayPlanetDetails({ planet: info })
+        );
+        break;
+      case 'species':
+        this.store.dispatch(
+          AppApiActions.displaySpeciesDetails({ species: info })
+        );
+        break;
+      case 'starship':
+        this.store.dispatch(
+          AppApiActions.displayStarshipDetails({ starship: info })
+        );
+        break;
+      case 'vehicles':
+        this.store.dispatch(
+          AppApiActions.displayVehicleDetails({ vehicle: info })
+        );
+        break;
+      default:
+        this.store.dispatch(
+          AppApiActions.displayCharacterDetails({ character: info })
+        );
+        break;
+    }
     const id = info.url.split(BASE_URI + this.category + '/')[1].split('/')[0];
     this.router.navigate([this.category, 'details', id]);
     console.log(info);

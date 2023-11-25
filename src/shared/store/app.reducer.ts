@@ -1,7 +1,7 @@
 import { createFeatureSelector, createReducer, createSelector, on } from "@ngrx/store";
 import { AppApiActions } from "./app.actions";
 import { HttpErrorResponse } from "@angular/common/http";
-import { PeopleType, filmsResponseType, peopleResponseType, planetResponseType, speciesResponseType, starshipResponseType, vehicleResponseType } from "../data.types";
+import { FilmType, PeopleType, PlanetType, SpeciesType, StarshipType, VehicleType, filmsResponseType, peopleResponseType, planetResponseType, speciesResponseType, starshipResponseType, vehicleResponseType } from "../data.types";
 
 export const featureAppKey = 'app';
 
@@ -13,6 +13,12 @@ export interface AppState {
     allSpecies: speciesResponseType | null;
     allStarships: starshipResponseType | null;
     allVehicles: vehicleResponseType | null;
+    characterDetail: PeopleType | null;
+    filmDetail: FilmType | null;
+    planetDetail: PlanetType | null;
+    speciesDetail: SpeciesType | null;
+    starshipDetail: StarshipType | null;
+    vehicleDetail: VehicleType | null;
     loading: boolean;
 }
 
@@ -24,6 +30,12 @@ const initialState: AppState = {
     allSpecies: null,
     allStarships: null,
     allVehicles: null,
+    filmDetail: null,
+    planetDetail: null,
+    speciesDetail: null,
+    starshipDetail: null,
+    vehicleDetail: null,
+    characterDetail: null,
     loading: false,
 };
 
@@ -62,6 +74,36 @@ export const getAllStarships = createSelector(
 export const getAllVehicles = createSelector(
     selectAppFeature,
     (state: AppState) => state.allVehicles
+);
+
+export const getCharacterDetail = createSelector(
+    selectAppFeature,
+    (state: AppState) => state.characterDetail
+);
+
+export const getFilmDetail = createSelector(
+    selectAppFeature,
+    (state: AppState) => state.filmDetail
+);
+
+export const getPlanetDetail = createSelector(
+    selectAppFeature,
+    (state: AppState) => state.planetDetail
+);
+
+export const getSpeciesDetail = createSelector(
+    selectAppFeature,
+    (state: AppState) => state.speciesDetail
+);
+
+export const getStarshipDetail = createSelector(
+    selectAppFeature,
+    (state: AppState) => state.starshipDetail
+);
+
+export const getVehicleDetail = createSelector(
+    selectAppFeature,
+    (state: AppState) => state.vehicleDetail
 );
 
 export const getLoadingState = createSelector(
@@ -165,6 +207,20 @@ export const AppReducer = createReducer<AppState>(
             ...state,
             loading: false,
             error: action.error
+        };
+    }),
+
+    on(AppApiActions.displayCharacterDetails, (state: AppState, action) => {
+        return {
+            ...state,
+            characterDetail: action.character
+        };
+    }),
+
+    on(AppApiActions.displayFilmDetails, (state: AppState, action) => {
+        return {
+            ...state,
+            filmDetail: action.film
         };
     }),
 

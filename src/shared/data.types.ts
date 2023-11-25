@@ -26,7 +26,7 @@ export type FilmType = {
     opening_crawl: string;
     planets: string[];
     producer: string[];
-    release_date: string[];
+    release_date: string;
     species: string[];
     starships: string[];
     title: string[];
