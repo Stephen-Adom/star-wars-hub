@@ -14,4 +14,24 @@ export class ApiService {
     fetchAllPeople() {
         return this.http.get<any>(BASE_URI + 'people')
     }
+
+    fetchAllFilms() {
+        return this.http.get<any>(BASE_URI + 'films')
+    }
+
+    fetchAllPlanets() {
+        return this.http.get<any>(BASE_URI + 'planets')
+    }
+
+    fetchAllSpecies() {
+        return this.http.get<any>(BASE_URI + 'species')
+    }
+
+    fetchAllStarships() {
+        return this.http.get<any>(BASE_URI + 'starships')
+    }
+
+    fetchAllVehicles() {
+        return this.http.get<any>(BASE_URI + 'vehicles')
+    }
 }
