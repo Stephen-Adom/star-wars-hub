@@ -2,9 +2,9 @@
   <div
     class="subheader w-full py-2 px-4 text-white flex items-center justify-between"
   >
-    <h5 class="text-lg">People</h5>
+    <h5 class="text-lg" *ngIf="category">{{ category | titlecase }}</h5>
 
-    <a href="" class="flex items-center gap-x-1">
+    <a href="javascript:;" (click)="goBack()" class="flex items-center gap-x-1">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
@@ -47,13 +47,56 @@
           <th style="width: auto" *ngFor="let header of columns">
             {{ header.label }}
           </th>
+          <th style="width: auto">Action</th>
         </tr>
       </ng-template>
-      <ng-template pTemplate="body" let-customer let-columns="columns">
+      <ng-template pTemplate="body" let-info let-columns="columns">
         <tr>
           <ng-container *ngFor="let header of columns">
-            <td>{{ customer[header.value] }}</td>
+            <ng-container [ngSwitch]="header.type">
+              <ng-container *ngSwitchCase="'number'">
+                <td>
+                  {{
+                    info[header.value] ? (info[header.value] | number) : "N/A"
+                  }}
+                </td>
+              </ng-container>
+              <ng-container *ngSwitchCase="'date'">
+                <td>
+                  {{
+                    info[header.value] ? formatDate(info[header.value]) : "N/A"
+                  }}
+                </td>
+              </ng-container>
+              <ng-container *ngSwitchDefault>
+                <td>{{ info[header.value] }}</td>
+              </ng-container>
+            </ng-container>
           </ng-container>
+          <td>
+            <button
+              (click)="viewDetails(info)"
+              type="button"
+              class="bg-yellow-700 hover:bg-yellow-800 px-4 py-[0.35rem] rounded-md text-white text-xs flex items-center gap-x-1"
+            >
+              view details
+
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-4 h-4"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5"
+                />
+              </svg>
+            </button>
+          </td>
         </tr>
       </ng-template>
       <ng-template pTemplate="paginatorleft">

@@ -125,3 +125,26 @@ swiper-slide.swiper-slide-next {
   padding: 0.5rem 1rem;
   font-weight: 700;
 }
+
+.p-paginator .p-paginator-pages .p-paginator-page {
+  &.p-highlight {
+    background: #32312f;
+    border-color: #32312f;
+    color: #ff8d00;
+  }
+
+  &:not(.p-highlight):hover {
+    background: #32312f;
+    border-color: transparent;
+    color: #ff8d00;
+  }
+}
+
+.p-paginator .p-paginator-first:not(.p-disabled):not(.p-highlight):hover,
+.p-paginator .p-paginator-prev:not(.p-disabled):not(.p-highlight):hover,
+.p-paginator .p-paginator-next:not(.p-disabled):not(.p-highlight):hover,
+.p-paginator .p-paginator-last:not(.p-disabled):not(.p-highlight):hover {
+  background: #32312f;
+  border-color: transparent;
+  color: #ff8d00;
+}

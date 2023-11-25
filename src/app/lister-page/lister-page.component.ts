@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { Table, TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { ActivatedRoute } from '@angular/router';
@@ -8,6 +8,7 @@ import { AppState, getAllCharacters } from 'src/shared/store/app.reducer';
 import { Store } from '@ngrx/store';
 import { AppApiActions } from 'src/shared/store/app.actions';
 import { LazyLoadEvent } from 'primeng/api';
+import { FilmType, PeopleType } from 'src/shared/data.types';
 
 
 interface PageEvent {
@@ -260,11 +261,12 @@ export class ListerPageComponent implements OnInit, OnDestroy {
   tableHeader: { label: string; value: string }[] = [];
   totalRecords: number = 11;
   loading = false;
-  data: any = [];
+  data: any[] = [];
 
   constructor(
-    private route: ActivatedRoute,
     private store: Store<AppState>,
+    private route: ActivatedRoute,
+    private location: Location,
   ) { }
 
   ngOnInit(): void {
@@ -307,6 +309,18 @@ export class ListerPageComponent implements OnInit, OnDestroy {
   loadCustomers(event: LazyLoadEvent) {
     const page = event.first! / event?.rows! + 1
     this.store.dispatch(AppApiActions.fetchAllCharacters({ pageNumber: page }))
+  }
+
+  goBack() {
+    this.location.back();
+  }
+
+  formatDate(date: string) {
+    return date;
+  }
+
+  viewDetails(info: any) {
+    console.log(info);
   }
 
   ngOnDestroy(): void {

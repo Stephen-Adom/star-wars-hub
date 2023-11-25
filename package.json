@@ -21,6 +21,7 @@
     "@ngrx/effects": "^15.4.0",
     "@ngrx/store": "^15.4.0",
     "@ngrx/store-devtools": "^15.4.0",
+    "date-fns": "^2.30.0",
     "primeng": "^15.4.1",
     "rxjs": "~7.8.0",
     "swiper": "^11.0.5",
