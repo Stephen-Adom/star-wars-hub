@@ -26,8 +26,9 @@
 Explore the Star Wars universe with our information-packed website. From characters to planets and starships, delve into detailed insights seamlessly
 
 <div style="display: flex; align-items: center;">
-<img src="./assets/desktop.png" height="500px" />
-<img src="./assets/mobile.png" height="450px" />
+<img src="./assets/screenshots/1.png" height="500px" />
+<img src="./assets/screenshots/2.png" height="500px" />
+<img src="./assets/screenshots/3.png" height="500px" />
 </div>
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -38,7 +39,7 @@ Explore the Star Wars universe with our information-packed website. From charact
 <details>
   <summary>Client Side</summary>
   <ul>
-    <li><a href="https://angular.io/cli">Anguar</a></li>
+    <li><a href="https://angular.io/cli">Angular</a></li>
     <li><a href="https://primeng.org/">Primeng</a></li>
     <li><a href="https://rxjs.dev/">RxJS</a></li>
   </ul>
@@ -66,9 +67,9 @@ Explore the Star Wars universe with our information-packed website. From charact
 - Footer with logo and copyright text
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## 💻 Getting Started 🎹
+## 💻 Getting Started
 
-### Prerequisites 🎹
+### Prerequisites
 
 To run this project, you need the following:
 
@@ -86,11 +87,11 @@ $ npm --version
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## Setup 🎹
+## Setup
 
 Clone this repository into your desired folder by following the following steps.
 
-### Install 🎹
+### Install
 
 In the terminal, go to your file directory and run this command:
 
@@ -101,7 +102,7 @@ $ cd star-wars-hub
 $ npm install
 ```
 
-### Initialize 🎹
+### Initialize
 
 In the terminal run this command:
 
