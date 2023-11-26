@@ -45,7 +45,7 @@
 
     <div class="navigation-links flex gap-3 flex-row items-center">
       <div
-        class="recent-visits min-w-[500px] flex items-center space-x-1 justify-end"
+        class="recent-visits min-w-[500px] items-center space-x-1 justify-end hidden sm:hidden md:flex"
       >
         <a
           *ngFor="let history of recentHistories$ | async"

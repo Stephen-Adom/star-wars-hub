@@ -155,9 +155,12 @@ swiper-slide {
   swiper-container {
     padding: 18px;
   }
+
+  .p-dialog {
+    width: 95vw !important;
+  }
 }
 
-/* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
 }
 
