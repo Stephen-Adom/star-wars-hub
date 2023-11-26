@@ -150,3 +150,10 @@ export type planetResponseType = {
     previous: string | null;
     results: PlanetType[]
 }
+
+export type searchResponseType = {
+    count: number;
+    next: number | null;
+    previous: number | null;
+    results: PeopleType[];
+}

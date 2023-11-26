@@ -375,7 +375,6 @@ export class ListerPageComponent implements OnInit, OnDestroy {
   }
 
   lazyLoadData(event: LazyLoadEvent) {
-    console.log(event);
     if (this.category) {
       const page = event.first! / event?.rows! + 1;
       this.store.dispatch(AppApiActions.toggleLoading({ state: true }));

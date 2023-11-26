@@ -6,68 +6,52 @@
   [draggable]="false"
   [resizable]="false"
   position="top"
+  (onHide)="onHide()"
 >
   <ng-template pTemplate="header">
-    <span class="text-base font-semibold">Search Result: 4</span>
+    <span class="text-base font-semibold" *ngIf="result"
+      >Search Result: {{ result.count }}</span
+    >
   </ng-template>
 
-  <section class="result-content flex flex-col gap-y-1">
+  <section
+    class="result-content flex flex-col gap-y-1 max-h-[350px] overflow-y-auto pr-[10px]"
+    *ngIf="result"
+  >
     <div
-      class="flex items-center gap-2 py-2 border-b first:border-gray-600 last:border-transparent"
+      *ngFor="let info of result.results"
+      class="flex items-center gap-2 py-2 border-b border-gray-600 last:border-transparent"
     >
       <div class="logo-container w-10 h-10 rounded-full overflow-hidden">
-        <img src="assets/images/character-logo.jpg" class="w-full" alt="luke" />
+        <img
+          src="assets/images/character-logo.jpg"
+          class="w-full"
+          [attr.alt]="info.name"
+        />
       </div>
       <div>
-        <span class="text-base font-bold">Luke Skywalker</span>
+        <span class="text-base font-bold">{{ info.name }}</span>
         <div class="flex items-center flex-wrap gap-2">
           <span class="text-sm"
-            >Gender: <span class="text-yellow-600">sdf</span></span
+            >Gender:
+            <span class="text-yellow-600">{{ info.gender }}</span></span
           >
           <span class="text-sm"
-            >Birth Year: <span class="text-yellow-600">sdf</span></span
+            >Birth Year:
+            <span class="text-yellow-600">{{ info.birth_year }}</span></span
           >
           <span class="text-sm"
-            >Height: <span class="text-yellow-600">sdf</span></span
+            >Height:
+            <span class="text-yellow-600">{{ info.height }}</span></span
           >
         </div>
       </div>
 
       <div class="action-container ml-auto">
         <button
+          (click)="viewDetails(info)"
           type="button"
-          class="bg-yellow-600 rounded-full px-4 py-2 text-white text-xs"
-        >
-          view details
-        </button>
-      </div>
-    </div>
-
-    <div
-      class="flex items-center gap-2 py-2 first:border-gray-600 last:border-transparent"
-    >
-      <div class="logo-container w-10 h-10 rounded-full overflow-hidden">
-        <img src="assets/images/character-logo.jpg" class="w-full" alt="luke" />
-      </div>
-      <div>
-        <span class="text-base font-bold">Luke Skywalker</span>
-        <div class="flex items-center flex-wrap gap-2">
-          <span class="text-sm"
-            >Gender: <span class="text-yellow-600">sdf</span></span
-          >
-          <span class="text-sm"
-            >Birth Year: <span class="text-yellow-600">sdf</span></span
-          >
-          <span class="text-sm"
-            >Height: <span class="text-yellow-600">sdf</span></span
-          >
-        </div>
-      </div>
-
-      <div class="action-container ml-auto">
-        <button
-          type="button"
-          class="bg-yellow-600 rounded-full px-4 py-2 text-white text-xs"
+          class="bg-yellow-600 hover:bg-yellow-700 rounded-full px-4 py-2 text-white text-xs"
         >
           view details
         </button>

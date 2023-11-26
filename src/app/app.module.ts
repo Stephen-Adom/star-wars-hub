@@ -14,6 +14,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AppEffects } from 'src/shared/store/app.effect';
 import { AppReducer } from 'src/shared/store/app.reducer';
 import { SearchResultDialogComponent } from './search-result-dialog/search-result-dialog.component';
+import { SearchResultService } from 'src/shared/search-result-data.service';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { SearchResultDialogComponent } from './search-result-dialog/search-resul
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() })
   ],
   providers: [
-    ApiService
+    ApiService,
+    SearchResultService
   ],
   bootstrap: [AppComponent]
 })
