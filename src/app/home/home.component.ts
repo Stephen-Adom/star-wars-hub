@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, CUSTOM_ELEMENTS_SCHEMA, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SwiperContainer, register } from 'swiper/element/bundle';
 import { Router } from '@angular/router';
@@ -19,8 +19,8 @@ type infoType = {
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent {
-  @ViewChild('swiperContainer') swiperContainer!: SwiperContainer
+export class HomeComponent implements AfterViewInit {
+  @ViewChild('swiperContainer') swiperContainer!: ElementRef<SwiperContainer>
 
   infoOverview: infoType[] = [
     {
@@ -58,6 +58,45 @@ export class HomeComponent {
   constructor(
     private router: Router
   ) { }
+
+  ngAfterViewInit(): void {
+    // swiper parameters
+    const swiperParams = {
+      slidesPerView: 3,
+      spaceBetween: 15,
+      speed: 500,
+      loop: true,
+      cssMode: true,
+      centeredSlides: true,
+      navigation: true,
+      pagination: true,
+      class: 'mySwiper',
+      breakpoints: {
+        350: {
+          slidesPerView: 1,
+        },
+        640: {
+          slidesPerView: 2,
+        },
+        1024: {
+          slidesPerView: 3,
+        },
+      },
+      on: {
+        init() {
+          // ...
+        },
+      },
+    };
+
+    // now we need to assign all parameters to Swiper element
+    Object.assign(this.swiperContainer.nativeElement, swiperParams);
+
+    console.log(this.swiperContainer);
+    // and now initialize it
+    this.swiperContainer.nativeElement.initialize();
+
+  }
 
   viewDetails(info: infoType) {
     this.router.navigate([info.title.toLowerCase(), 'list'])

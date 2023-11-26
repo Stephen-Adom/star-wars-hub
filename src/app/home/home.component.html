@@ -1,22 +1,11 @@
 <div
-  class="relative text-white z-[4] w-full h-[550px] flex items-center justify-center mt-[50px]"
+  class="relative text-white z-[4] w-full h-[550px] flex items-center justify-center mt-[100px] md:mt-[50px]"
 >
   <div class="slider-container w-full h-full">
-    <swiper-container
-      slides-per-view="3"
-      speed="500"
-      loop="true"
-      css-mode="true"
-      centered-slides="true"
-      navigation="true"
-      pagination="true"
-      class="mySwiper"
-      space-between="30"
-      #swiperContainer
-    >
+    <swiper-container init="false" #swiperContainer>
       <swiper-slide *ngFor="let info of infoOverview">
         <div
-          class="w-full h-full rounded-lg overflow-hidden bg-center bg-cover bg-no-repeat flex flex-col justify-end info-container"
+          class="w-full h-full rounded-lg overflow-hidden bg-center bg-cover bg-no-repeat flex flex-col bg-[#0c0e1a] justify-end info-container"
           [ngStyle]="{ 'background-image': 'url(' + info.image + ')' }"
         >
           <div class="content text-white p-5">

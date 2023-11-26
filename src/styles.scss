@@ -42,12 +42,13 @@ body {
 swiper-container {
   width: 100%;
   height: 100%;
-  padding: 30px;
 }
 
 swiper-slide {
   height: 400px !important;
-  transform: translateY(15%);
+  transform: translateY(10%);
+  border-radius: 22px;
+  overflow: hidden;
 
   .info-container {
     // position: relative !important;
@@ -169,4 +170,21 @@ swiper-slide {
   background: #32312f;
   border-color: transparent;
   color: #ff8d00;
+}
+
+@media only screen and (max-width: 600px) {
+  swiper-container {
+    padding: 18px;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  swiper-container {
+    padding: 18px;
+  }
 }
