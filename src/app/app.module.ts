@@ -13,6 +13,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AppEffects } from 'src/shared/store/app.effect';
 import { AppReducer } from 'src/shared/store/app.reducer';
+import { SearchResultDialogComponent } from './search-result-dialog/search-result-dialog.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { AppReducer } from 'src/shared/store/app.reducer';
     NavigationComponent,
     BrowserAnimationsModule,
     HttpClientModule,
+    SearchResultDialogComponent,
     StoreModule.forRoot({ app: AppReducer }),
     EffectsModule.forRoot([AppEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() })
