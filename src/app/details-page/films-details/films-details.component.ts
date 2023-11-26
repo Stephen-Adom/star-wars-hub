@@ -19,6 +19,7 @@ import { format } from 'date-fns';
 })
 export class FilmsDetailsComponent implements OnInit, OnDestroy {
   dataId!: string;
+  category!: string;
   filmDetails!: FilmType;
   filmDetailsSubscription = new Subscription();
 
@@ -31,12 +32,14 @@ export class FilmsDetailsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.route.paramMap.subscribe(data => {
       this.dataId = data.get('id')!;
+      this.category = data.get('category')!
     })
 
 
     this.filmDetailsSubscription = this.store.select(getFilmDetail).subscribe((data) => {
       if (data) {
         this.filmDetails = data;
+        this.saveVisit();
       } else {
         this.fetchFilmDetails();
       }
@@ -57,5 +60,16 @@ export class FilmsDetailsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.filmDetailsSubscription.unsubscribe();
+  }
+
+  saveVisit() {
+    this.store.dispatch(AppApiActions.updateVisitHistory({
+      history: {
+        name: this.filmDetails.title,
+        category: this.category as string,
+        id: parseInt(this.dataId!),
+        lastVisited: new Date()
+      }
+    }));
   }
 }

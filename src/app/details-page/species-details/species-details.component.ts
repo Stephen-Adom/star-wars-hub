@@ -18,6 +18,7 @@ import { AppState, getPlanetDetail, getSpeciesDetail } from 'src/shared/store/ap
 })
 export class SpeciesDetailsComponent {
   dataId!: string;
+  category!: string;
   speciesDetailsSubscription = new Subscription();
   speciesDetails!: SpeciesType;
   homeWorldDetails!: PlanetType;
@@ -31,12 +32,14 @@ export class SpeciesDetailsComponent {
   ngOnInit(): void {
     this.route.paramMap.subscribe(data => {
       this.dataId = data.get('id')!;
+      this.category = data.get('category')!
     })
 
 
     this.speciesDetailsSubscription = this.store.select(getSpeciesDetail).subscribe((data) => {
       if (data) {
         this.speciesDetails = data;
+        this.saveVisit();
         this.fetchHomeWorldDetails();
       } else {
         this.fetchSpeciesDetails();
@@ -59,5 +62,16 @@ export class SpeciesDetailsComponent {
         this.store.dispatch(AppApiActions.displaySpeciesDetails({ species: data }))
       }
     })
+  }
+
+  saveVisit() {
+    this.store.dispatch(AppApiActions.updateVisitHistory({
+      history: {
+        name: this.speciesDetails.name,
+        category: this.category as string,
+        id: parseInt(this.dataId!),
+        lastVisited: new Date()
+      }
+    }));
   }
 }

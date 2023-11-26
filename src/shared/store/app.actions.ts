@@ -38,5 +38,6 @@ export const AppApiActions = createActionGroup({
         'toggle loading': props<{ state: boolean }>(),
 
         'clear data': emptyProps(),
+        'update visit history': props<{ history: { name: string; category: string; id: number, lastVisited: Date } }>()
     },
 });

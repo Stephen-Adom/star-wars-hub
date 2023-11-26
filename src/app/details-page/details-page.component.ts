@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
-import { AppState } from 'src/shared/store/app.reducer';
 import { ActivatedRoute } from '@angular/router';
-import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { CharacterDetailsComponent } from './character-details/character-details.component';
 import { FilmsDetailsComponent } from './films-details/films-details.component';
@@ -30,8 +28,8 @@ export class DetailsPageComponent {
   routeSubscription = new Subscription();
   category!: string | null;
 
+
   constructor(
-    private store: Store<AppState>,
     private route: ActivatedRoute,
     private location: Location
   ) { }

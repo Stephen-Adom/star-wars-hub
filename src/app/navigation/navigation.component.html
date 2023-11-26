@@ -10,7 +10,7 @@
       <a
         [routerLink]="['/']"
         href="javascript:;"
-        class="font-bold text-white website-logo w-[26%] sm:w-[26%] md:w-[14%] lg:w-[8%]"
+        class="font-bold text-white website-logo w-[26%] sm:w-[26%] md:w-[15%]"
       >
         <img
           src="assets/images/star-wars-logo.png"
@@ -44,6 +44,34 @@
     </div>
 
     <div class="navigation-links flex gap-3 flex-row items-center">
+      <div
+        class="recent-visits min-w-[500px] flex items-center space-x-1 justify-end"
+      >
+        <a
+          *ngFor="let history of recentHistories$ | async"
+          href="javascript:;"
+          (click)="viewDetails(history)"
+          class="text-xs italic text-white flex items-center gap-1 underline underline-yellow-600 font-semibold"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-3 h-3 text-yellow-600"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+
+          {{ history.name }}</a
+        >
+      </div>
+
       <form novalidate class="relative text-white">
         <ng-container *ngIf="searching; else elseTemplate">
           <svg

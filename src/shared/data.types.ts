@@ -29,7 +29,7 @@ export type FilmType = {
     release_date: string;
     species: string[];
     starships: string[];
-    title: string[];
+    title: string;
     url: string[];
     vehicles: string[];
 }

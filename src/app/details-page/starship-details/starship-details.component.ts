@@ -18,6 +18,7 @@ import { AppState, getStarshipDetail } from 'src/shared/store/app.reducer';
 })
 export class StarshipDetailsComponent {
   dataId!: string;
+  category!: string;
   starshipDetailsSubscription = new Subscription();
   starshipDetails!: StarshipType;
 
@@ -30,12 +31,14 @@ export class StarshipDetailsComponent {
   ngOnInit(): void {
     this.route.paramMap.subscribe(data => {
       this.dataId = data.get('id')!;
+      this.category = data.get('category')!
     })
 
 
     this.starshipDetailsSubscription = this.store.select(getStarshipDetail).subscribe((data) => {
       if (data) {
         this.starshipDetails = data;
+        this.saveVisit();
       } else {
         this.fetchStarshipDetails();
       }
@@ -48,5 +51,16 @@ export class StarshipDetailsComponent {
         this.store.dispatch(AppApiActions.displayStarshipDetails({ starship: data }))
       }
     })
+  }
+
+  saveVisit() {
+    this.store.dispatch(AppApiActions.updateVisitHistory({
+      history: {
+        name: this.starshipDetails.name,
+        category: this.category as string,
+        id: parseInt(this.dataId!),
+        lastVisited: new Date()
+      }
+    }));
   }
 }

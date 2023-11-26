@@ -19,6 +19,7 @@ export interface AppState {
     speciesDetail: SpeciesType | null;
     starshipDetail: StarshipType | null;
     vehicleDetail: VehicleType | null;
+    visitHistory: { name: string; category: string; id: number, lastVisited: Date }[];
     loading: boolean;
 }
 
@@ -37,6 +38,7 @@ const initialState: AppState = {
     vehicleDetail: null,
     characterDetail: null,
     loading: false,
+    visitHistory: [],
 };
 
 export const selectAppFeature = createFeatureSelector<AppState>(featureAppKey);
@@ -109,6 +111,11 @@ export const getVehicleDetail = createSelector(
 export const getLoadingState = createSelector(
     selectAppFeature,
     (state: AppState) => state.loading
+);
+
+export const getVisitHistory = createSelector(
+    selectAppFeature,
+    (state: AppState) => state.visitHistory
 );
 
 
@@ -268,5 +275,15 @@ export const AppReducer = createReducer<AppState>(
             allStarships: null,
             allVehicles: null,
         };
+    }),
+    on(AppApiActions.updateVisitHistory, (state: AppState, action) => {
+        return {
+            ...state,
+            visitHistory: [
+                action.history,
+                ...state.visitHistory,
+            ]
+        }
+
     }),
 );

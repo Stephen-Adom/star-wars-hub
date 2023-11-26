@@ -18,6 +18,7 @@ import { AppApiActions } from 'src/shared/store/app.actions';
 })
 export class PlanetDetailsComponent {
   dataId!: string;
+  category!: string;
   planetDetailsSubscription = new Subscription();
   planetDetails!: PlanetType;
 
@@ -30,12 +31,14 @@ export class PlanetDetailsComponent {
   ngOnInit(): void {
     this.route.paramMap.subscribe(data => {
       this.dataId = data.get('id')!;
+      this.category = data.get('category')!
     })
 
 
     this.planetDetailsSubscription = this.store.select(getPlanetDetail).subscribe((data) => {
       if (data) {
         this.planetDetails = data;
+        this.saveVisit();
       } else {
         this.fetchPlanetDetails();
       }
@@ -48,5 +51,16 @@ export class PlanetDetailsComponent {
         this.store.dispatch(AppApiActions.displayPlanetDetails({ planet: data }))
       }
     })
+  }
+
+  saveVisit() {
+    this.store.dispatch(AppApiActions.updateVisitHistory({
+      history: {
+        name: this.planetDetails.name,
+        category: this.category as string,
+        id: parseInt(this.dataId!),
+        lastVisited: new Date()
+      }
+    }));
   }
 }

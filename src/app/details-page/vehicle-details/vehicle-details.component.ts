@@ -18,6 +18,7 @@ import { AppState, getVehicleDetail } from 'src/shared/store/app.reducer';
 })
 export class VehicleDetailsComponent {
   dataId!: string;
+  category!: string;
   vehicleDetailsSubscription = new Subscription();
   vehicleDetails!: VehicleType;
 
@@ -30,12 +31,14 @@ export class VehicleDetailsComponent {
   ngOnInit(): void {
     this.route.paramMap.subscribe(data => {
       this.dataId = data.get('id')!;
+      this.category = data.get('category')!;
     })
 
 
     this.vehicleDetailsSubscription = this.store.select(getVehicleDetail).subscribe((data) => {
       if (data) {
         this.vehicleDetails = data;
+        this.saveVisit();
       } else {
         this.fetchVehicleDetails();
       }
@@ -48,5 +51,16 @@ export class VehicleDetailsComponent {
         this.store.dispatch(AppApiActions.displayVehicleDetails({ vehicle: data }))
       }
     })
+  }
+
+  saveVisit() {
+    this.store.dispatch(AppApiActions.updateVisitHistory({
+      history: {
+        name: this.vehicleDetails.name,
+        category: this.category as string,
+        id: parseInt(this.dataId!),
+        lastVisited: new Date()
+      }
+    }));
   }
 }

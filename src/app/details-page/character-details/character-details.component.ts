@@ -18,6 +18,7 @@ import { AppApiActions } from 'src/shared/store/app.actions';
 export class CharacterDetailsComponent implements OnInit {
   characterDetails!: PeopleType;
   dataId!: string;
+  category!: string;
   homeWorldDetails!: PlanetType;
   species: SpeciesType[] = [];
   starships: StarshipType[] = [];
@@ -32,12 +33,14 @@ export class CharacterDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe(data => {
       this.dataId = data.get('id')!;
+      this.category = data.get('category')!;
     })
 
 
     this.store.select(getCharacterDetail).subscribe((data) => {
       if (data) {
         this.characterDetails = data;
+        this.saveVisit();
         this.fetchHomeWorldDetails();
         this.fetchSpecies();
         this.fetchStarshipDetails();
@@ -98,5 +101,16 @@ export class CharacterDetailsComponent implements OnInit {
         })
       })
     }
+  }
+
+  saveVisit() {
+    this.store.dispatch(AppApiActions.updateVisitHistory({
+      history: {
+        name: this.characterDetails.name,
+        category: this.category as string,
+        id: parseInt(this.dataId!),
+        lastVisited: new Date()
+      }
+    }));
   }
 }

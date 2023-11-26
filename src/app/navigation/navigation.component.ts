@@ -1,11 +1,13 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
-import { debounceTime, distinctUntilChanged, fromEvent, map } from 'rxjs';
+import { Observable, debounceTime, distinctUntilChanged, fromEvent, last, map, takeLast } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { BASE_URI } from 'src/shared/api.service';
 import { searchResponseType } from 'src/shared/data.types';
 import { SearchResultService } from 'src/shared/search-result-data.service';
+import { AppState, getVisitHistory } from 'src/shared/store/app.reducer';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-navigation',
@@ -17,14 +19,25 @@ import { SearchResultService } from 'src/shared/search-result-data.service';
 export class NavigationComponent implements AfterViewInit {
   @ViewChild('searchInput') searchInput!: ElementRef<HTMLInputElement>;
   searching = false;
+  recentHistories$!: Observable<{
+    name: string,
+    category: string,
+    id: number,
+    lastVisited: Date
+  }[]>
 
   constructor(
     private resultservice: SearchResultService,
+    private store: Store<AppState>,
     private http: HttpClient,
     private router: Router
   ) { }
 
   ngAfterViewInit(): void {
+    this.recentHistories$ = this.store.select(getVisitHistory).pipe(
+      map(histories => histories.slice(0, 3))
+    )
+
     fromEvent(this.searchInput.nativeElement, 'input').pipe(
       debounceTime(800),
       distinctUntilChanged(),
@@ -57,5 +70,14 @@ export class NavigationComponent implements AfterViewInit {
 
   viewCharacters() {
     this.router.navigate(['people/list'])
+  }
+
+  viewDetails(history: {
+    name: string,
+    category: string,
+    id: number,
+    lastVisited: Date
+  }) {
+    this.router.navigate([history.category, "details", history.id]);
   }
 }
