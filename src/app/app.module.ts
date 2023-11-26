@@ -15,6 +15,7 @@ import { AppEffects } from 'src/shared/store/app.effect';
 import { AppReducer } from 'src/shared/store/app.reducer';
 import { SearchResultDialogComponent } from './search-result-dialog/search-result-dialog.component';
 import { SearchResultService } from 'src/shared/search-result-data.service';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { SearchResultService } from 'src/shared/search-result-data.service';
     AppRoutingModule,
     HomeComponent,
     NavigationComponent,
+    FooterComponent,
     BrowserAnimationsModule,
     HttpClientModule,
     SearchResultDialogComponent,
