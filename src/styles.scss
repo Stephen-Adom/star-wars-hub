@@ -10,6 +10,23 @@
 @import "primeng/resources/themes/lara-light-blue/theme.css";
 @import "primeng/resources/primeng.css";
 
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #363c3f;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c88a21;
+  border-radius: 13px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(30, 30, 30);
+}
+
 html,
 body {
   height: 100%;
