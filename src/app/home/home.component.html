@@ -1,0 +1,42 @@
+<div
+  class="relative text-white z-[4] w-full h-[550px] flex items-center justify-center mt-[100px] md:mt-[50px]"
+>
+  <div class="slider-container w-full h-full">
+    <swiper-container init="false" #swiperContainer>
+      <swiper-slide *ngFor="let info of infoOverview">
+        <div
+          class="w-full h-full rounded-lg overflow-hidden bg-center bg-cover bg-no-repeat flex flex-col bg-[#0c0e1a] justify-end info-container"
+          [ngStyle]="{ 'background-image': 'url(' + info.image + ')' }"
+        >
+          <div class="content text-white p-5">
+            <h5 class="font-bold mb-3 text-lg">{{ info.title }}</h5>
+            <p class="mb-3">
+              {{ info.description }}
+            </p>
+            <button
+              type="button"
+              class="text-yellow-600 font-semibold flex items-center space-x-3"
+              (click)="viewDetails(info)"
+            >
+              view details
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-4 h-4"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </swiper-slide>
+    </swiper-container>
+  </div>
+</div>

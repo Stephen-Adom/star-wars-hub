@@ -1,0 +1,83 @@
+<section
+  class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-[40%_60%]"
+  *ngIf="starshipDetails"
+>
+  <div></div>
+  <section class="p-4 relative z-[3] mt-5">
+    <h1 class="text-3xl font-bold">{{ starshipDetails.name }}</h1>
+
+    <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 gap-2 mt-2">
+      <div>
+        <span class="block text-sm">Model:</span>
+        <span class="block text-sm text-yellow-600">{{
+          starshipDetails.model
+        }}</span>
+      </div>
+
+      <div>
+        <span class="block text-sm">Starship Class:</span>
+        <span class="block text-sm text-yellow-600">{{
+          starshipDetails.starship_class
+        }}</span>
+      </div>
+
+      <div>
+        <span class="block text-sm">Manufacturer:</span>
+        <span class="block text-sm text-yellow-600">{{
+          starshipDetails.manufacturer
+        }}</span>
+      </div>
+
+      <div>
+        <span class="block text-sm">Cost in Credits:</span>
+        <span class="block text-sm text-yellow-600">{{
+          starshipDetails.cost_in_credits
+        }}</span>
+      </div>
+
+      <div>
+        <span class="block text-sm">Length:</span>
+        <span class="block text-sm text-yellow-600">{{
+          starshipDetails.length
+        }}</span>
+      </div>
+
+      <div>
+        <span class="block text-sm">Max Atmosphering Speed:</span>
+        <span class="block text-sm text-yellow-600">{{
+          starshipDetails.max_atmosphering_speed
+        }}</span>
+      </div>
+      <div>
+        <span class="block text-sm">No of Crews:</span>
+        <span class="block text-sm text-yellow-600">{{
+          starshipDetails.crew
+        }}</span>
+      </div>
+      <div>
+        <span class="block text-sm">No of Passengers:</span>
+        <span class="block text-sm text-yellow-600">{{
+          starshipDetails.passengers | number
+        }}</span>
+      </div>
+      <div>
+        <span class="block text-sm">Cargo Capacity:</span>
+        <span class="block text-sm text-yellow-600">{{
+          starshipDetails.cargo_capacity | number
+        }}</span>
+      </div>
+      <div>
+        <span class="block text-sm">Consumables:</span>
+        <span class="block text-sm text-yellow-600">{{
+          starshipDetails.consumables
+        }}</span>
+      </div>
+      <div>
+        <span class="block text-sm">Hyperdrive Rating:</span>
+        <span class="block text-sm text-yellow-600">{{
+          starshipDetails.hyperdrive_rating
+        }}</span>
+      </div>
+    </div>
+  </section>
+</section>

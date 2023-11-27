@@ -1,0 +1,80 @@
+<section
+  class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-[40%_60%]"
+  *ngIf="planetDetails"
+>
+  <div></div>
+  <section class="p-10 relative z-[3] mt-5">
+    <h1 class="text-3xl font-bold">{{ planetDetails.name }}</h1>
+
+    <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 gap-2 mt-2">
+      <div>
+        <span class="block text-sm">Rotation Period:</span>
+        <span class="block text-sm text-yellow-600">{{
+          planetDetails.rotation_period
+        }}</span>
+      </div>
+
+      <div>
+        <span class="block text-sm">Orbital Period:</span>
+        <span class="block text-sm text-yellow-600">{{
+          planetDetails.orbital_period
+        }}</span>
+      </div>
+
+      <div>
+        <span class="block text-sm">Diameter:</span>
+        <span class="block text-sm text-yellow-600">{{
+          planetDetails.diameter
+        }}</span>
+      </div>
+
+      <div>
+        <span class="block text-sm">Climate:</span>
+        <span class="block text-sm text-yellow-600">{{
+          planetDetails.climate
+        }}</span>
+      </div>
+
+      <div>
+        <span class="block text-sm">Gravity:</span>
+        <span class="block text-sm text-yellow-600">{{
+          planetDetails.gravity
+        }}</span>
+      </div>
+
+      <div>
+        <span class="block text-sm">Terrain:</span>
+        <span class="block text-sm text-yellow-600">{{
+          planetDetails.terrain
+        }}</span>
+      </div>
+
+      <div>
+        <span class="block text-sm">Surface Water:</span>
+        <span class="block text-sm text-yellow-600">{{
+          planetDetails.surface_water
+        }}</span>
+      </div>
+      <div>
+        <span class="block text-sm">Population:</span>
+        <span class="block text-sm text-yellow-600">{{
+          planetDetails.population
+        }}</span>
+      </div>
+
+      <div>
+        <span class="block text-sm">No of films:</span>
+        <span class="block text-sm text-yellow-600">{{
+          planetDetails.films.length
+        }}</span>
+      </div>
+
+      <div>
+        <span class="block text-sm">No of residents:</span>
+        <span class="block text-sm text-yellow-600">{{
+          planetDetails.residents.length
+        }}</span>
+      </div>
+    </div>
+  </section>
+</section>

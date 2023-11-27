@@ -1,0 +1,113 @@
+<section class="relative z-[4] mt-[50px]">
+  <div
+    class="subheader w-full py-2 px-4 text-white flex items-center justify-between"
+  >
+    <h5 class="text-lg" *ngIf="category">{{ category | titlecase }}</h5>
+
+    <a href="javascript:;" (click)="goBack()" class="flex items-center gap-x-1">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="w-4 h-4"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18"
+        />
+      </svg>
+
+      Back</a
+    >
+  </div>
+
+  <div class="text-white mt-2" *ngIf="category">
+    <p-table
+      #listTable
+      [value]="data"
+      [lazy]="true"
+      (onPage)="lazyLoadData($event)"
+      dataKey="name"
+      [paginator]="true"
+      [rows]="10"
+      [totalRecords]="totalRecords"
+      [loading]="loading"
+      [showCurrentPageReport]="true"
+      [tableStyle]="{ 'min-width': '50rem' }"
+      [rowsPerPageOptions]="[10, 25, 50]"
+      [scrollable]="true"
+      scrollHeight="450px"
+      [columns]="tableHeader"
+    >
+      <ng-template pTemplate="header" let-columns>
+        <tr *ngIf="columns.length">
+          <th style="width: auto" *ngFor="let header of columns">
+            {{ header.label }}
+          </th>
+          <th style="width: auto">Action</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-info let-columns="columns">
+        <tr>
+          <ng-container *ngFor="let header of columns">
+            <ng-container [ngSwitch]="header.type">
+              <ng-container *ngSwitchCase="'date'">
+                <td>
+                  {{
+                    info[header.value] ? formatDate(info[header.value]) : "N/A"
+                  }}
+                </td>
+              </ng-container>
+              <ng-container *ngSwitchDefault>
+                <td>{{ info[header.value] }}</td>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+          <td>
+            <button
+              (click)="viewDetails(info)"
+              type="button"
+              class="bg-yellow-700 hover:bg-yellow-800 px-4 py-[0.35rem] rounded-md text-white text-xs flex items-center gap-x-1"
+            >
+              view details
+
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-4 h-4"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5"
+                />
+              </svg>
+            </button>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="paginatorleft">
+        <p-button
+          type="button"
+          icon="pi pi-plus"
+          styleClass="p-button-text"
+        ></p-button>
+      </ng-template>
+      <ng-template pTemplate="paginatorright">
+        <p-button
+          type="button"
+          icon="pi pi-cloud"
+          styleClass="p-button-text"
+        ></p-button>
+      </ng-template>
+    </p-table>
+  </div>
+</section>
+
+<ng-template #peopleHeader> </ng-template>

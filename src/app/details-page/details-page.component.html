@@ -1,0 +1,59 @@
+<section class="relative z-[4] mt-[50px]">
+  <div
+    class="subheader w-full py-2 px-4 text-white flex items-center justify-between"
+  >
+    <h5 class="text-lg category-title" *ngIf="category">
+      {{ category | titlecase }} Details
+    </h5>
+
+    <a href="javascript:;" (click)="goBack()" class="flex items-center gap-x-1">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="w-4 h-4"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18"
+        />
+      </svg>
+
+      Back</a
+    >
+  </div>
+
+  <section
+    class="details-container relative after:content-[''] after:absolute after:top-0 after:left-0 after:w-full after:h-full after:bg-black/70 after:z-[1] text-white mt-2 min-h-[500px] bg-[#0c0e1a] rounded-lg bg-cover bg-center bg-no-repeat"
+    *ngIf="category"
+    [ngStyle]="{
+      'background-image': 'url(assets/images/' + category + '.jpg)'
+    }"
+  >
+    <ng-container [ngSwitch]="category">
+      <ng-container *ngSwitchCase="'people'">
+        <app-character-details />
+      </ng-container>
+      <ng-container *ngSwitchCase="'films'">
+        <app-films-details />
+      </ng-container>
+      <ng-container *ngSwitchCase="'planets'">
+        <app-planet-details />
+      </ng-container>
+      <ng-container *ngSwitchCase="'species'">
+        <app-species-details />
+      </ng-container>
+      <ng-container *ngSwitchCase="'starships'">
+        <app-starship-details />
+      </ng-container>
+      <ng-container *ngSwitchCase="'vehicles'">
+        <app-vehicle-details />
+      </ng-container>
+    </ng-container>
+  </section>
+</section>
+
+<ng-template #peopleHeader> </ng-template>

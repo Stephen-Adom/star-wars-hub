@@ -1,0 +1,72 @@
+<section
+  class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-[40%_60%]"
+  *ngIf="filmDetails"
+>
+  <div></div>
+  <section class="p-10 relative z-[3]">
+    <h1 class="text-3xl font-bold">{{ filmDetails.title }}</h1>
+
+    <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 gap-2 mt-2">
+      <div>
+        <span class="block text-sm">Producer:</span>
+        <span class="block text-sm text-yellow-600">{{
+          filmDetails.producer
+        }}</span>
+      </div>
+
+      <div>
+        <span class="block text-sm">Director:</span>
+        <span class="block text-sm text-yellow-600">{{
+          filmDetails.director
+        }}</span>
+      </div>
+
+      <div>
+        <span class="block text-sm">Release Date:</span>
+        <span class="block text-sm text-yellow-600">{{
+          formatDate(filmDetails.release_date)
+        }}</span>
+      </div>
+
+      <div>
+        <span class="block text-sm">No of characters:</span>
+        <span class="block text-sm text-yellow-600">{{
+          filmDetails.characters.length
+        }}</span>
+      </div>
+
+      <div>
+        <span class="block text-sm">No of Planets:</span>
+        <span class="block text-sm text-yellow-600">{{
+          filmDetails.planets.length
+        }}</span>
+      </div>
+      <div>
+        <span class="block text-sm">No of Starships:</span>
+        <span class="block text-sm text-yellow-600">{{
+          filmDetails.starships.length
+        }}</span>
+      </div>
+      <div>
+        <span class="block text-sm">No of Species:</span>
+        <span class="block text-sm text-yellow-600">{{
+          filmDetails.species.length
+        }}</span>
+      </div>
+      <div>
+        <span class="block text-sm">No of Vehicles:</span>
+        <span class="block text-sm text-yellow-600">{{
+          filmDetails.vehicles.length
+        }}</span>
+      </div>
+    </div>
+
+    <section class="mt-3">
+      <h6 class="mb-3 italic">Description:</h6>
+
+      <div class="text-lg">
+        {{ filmDetails.opening_crawl }}
+      </div>
+    </section>
+  </section>
+</section>
