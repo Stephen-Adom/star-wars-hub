@@ -42,7 +42,6 @@ export class PlanetDetailsComponent implements OnInit, OnDestroy {
         if (data) {
           this.planetDetails = data;
           this.saveVisit();
-          console.log('saving visit');
         } else {
           this.fetchPlanetDetails();
         }
