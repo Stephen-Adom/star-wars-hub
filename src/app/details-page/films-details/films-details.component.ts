@@ -22,6 +22,8 @@ export class FilmsDetailsComponent implements OnInit, OnDestroy {
   category!: string;
   filmDetails!: FilmType;
   filmDetailsSubscription = new Subscription();
+  routeParamSubscription = new Subscription();
+  httpSubscription = new Subscription();
 
   constructor(
     private http: HttpClient,
@@ -30,7 +32,7 @@ export class FilmsDetailsComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(data => {
+    this.routeParamSubscription = this.route.paramMap.subscribe(data => {
       this.dataId = data.get('id')!;
       this.category = data.get('category')!
     })
@@ -47,7 +49,7 @@ export class FilmsDetailsComponent implements OnInit, OnDestroy {
   }
 
   fetchFilmDetails() {
-    this.http.get(BASE_URI + 'films/' + this.dataId).subscribe((data: any) => {
+    this.httpSubscription = this.http.get(BASE_URI + 'films/' + this.dataId).subscribe((data: any) => {
       if (data) {
         this.store.dispatch(AppApiActions.displayFilmDetails({ film: data }))
       }
@@ -60,6 +62,8 @@ export class FilmsDetailsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.filmDetailsSubscription.unsubscribe();
+    this.httpSubscription.unsubscribe();
+    this.routeParamSubscription.unsubscribe();
   }
 
   saveVisit() {

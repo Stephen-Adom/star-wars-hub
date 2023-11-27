@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
@@ -16,11 +16,13 @@ import { AppApiActions } from 'src/shared/store/app.actions';
   templateUrl: './planet-details.component.html',
   styleUrls: ['./planet-details.component.scss']
 })
-export class PlanetDetailsComponent {
+export class PlanetDetailsComponent implements OnInit, OnDestroy {
   dataId!: string;
   category!: string;
   planetDetailsSubscription = new Subscription();
   planetDetails!: PlanetType;
+  routeParamSubscription = new Subscription();
+  httpSubscription = new Subscription();
 
   constructor(
     private http: HttpClient,
@@ -29,7 +31,7 @@ export class PlanetDetailsComponent {
   ) { }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(data => {
+    this.routeParamSubscription = this.route.paramMap.subscribe(data => {
       this.dataId = data.get('id')!;
       this.category = data.get('category')!
     })
@@ -39,6 +41,7 @@ export class PlanetDetailsComponent {
       if (data) {
         this.planetDetails = data;
         this.saveVisit();
+        console.log('saving visit');
       } else {
         this.fetchPlanetDetails();
       }
@@ -46,7 +49,7 @@ export class PlanetDetailsComponent {
   }
 
   fetchPlanetDetails() {
-    this.http.get(BASE_URI + 'planets/' + this.dataId).subscribe((data: any) => {
+    this.httpSubscription = this.http.get(BASE_URI + 'planets/' + this.dataId).subscribe((data: any) => {
       if (data) {
         this.store.dispatch(AppApiActions.displayPlanetDetails({ planet: data }))
       }
@@ -62,5 +65,11 @@ export class PlanetDetailsComponent {
         lastVisited: new Date()
       }
     }));
+  }
+
+  ngOnDestroy(): void {
+    this.planetDetailsSubscription.unsubscribe();
+    this.routeParamSubscription.unsubscribe();
+    this.httpSubscription.unsubscribe();
   }
 }

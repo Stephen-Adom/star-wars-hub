@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
@@ -16,11 +16,13 @@ import { AppState, getStarshipDetail } from 'src/shared/store/app.reducer';
   templateUrl: './starship-details.component.html',
   styleUrls: ['./starship-details.component.scss']
 })
-export class StarshipDetailsComponent {
+export class StarshipDetailsComponent implements OnInit, OnDestroy {
   dataId!: string;
   category!: string;
   starshipDetailsSubscription = new Subscription();
   starshipDetails!: StarshipType;
+  routeParamSubscription = new Subscription();
+  httpSubscription = new Subscription();
 
   constructor(
     private http: HttpClient,
@@ -29,7 +31,7 @@ export class StarshipDetailsComponent {
   ) { }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(data => {
+    this.routeParamSubscription = this.route.paramMap.subscribe(data => {
       this.dataId = data.get('id')!;
       this.category = data.get('category')!
     })
@@ -46,7 +48,7 @@ export class StarshipDetailsComponent {
   }
 
   fetchStarshipDetails() {
-    this.http.get(BASE_URI + 'starships/' + this.dataId).subscribe((data: any) => {
+    this.httpSubscription = this.http.get(BASE_URI + 'starships/' + this.dataId).subscribe((data: any) => {
       if (data) {
         this.store.dispatch(AppApiActions.displayStarshipDetails({ starship: data }))
       }
@@ -62,5 +64,11 @@ export class StarshipDetailsComponent {
         lastVisited: new Date()
       }
     }));
+  }
+
+  ngOnDestroy(): void {
+    this.starshipDetailsSubscription.unsubscribe()
+    this.routeParamSubscription.unsubscribe()
+    this.httpSubscription.unsubscribe()
   }
 }

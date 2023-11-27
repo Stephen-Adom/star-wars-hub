@@ -268,21 +268,28 @@ export const AppReducer = createReducer<AppState>(
     on(AppApiActions.clearData, (state: AppState) => {
         return {
             ...state,
-            allCharacters: null,
-            allFilms: null,
-            allPlanets: null,
-            allSpecies: null,
-            allStarships: null,
-            allVehicles: null,
+            filmDetail: null,
+            planetDetail: null,
+            speciesDetail: null,
+            starshipDetail: null,
+            vehicleDetail: null,
+            characterDetail: null,
         };
     }),
     on(AppApiActions.updateVisitHistory, (state: AppState, action) => {
+        const histories = [...state.visitHistory];
+
+        const historyExistIndex = histories.findIndex(history => (history.name === action.history.name) && (history.id === action.history.id) && history.category === action.history.category);
+
+        if (historyExistIndex !== -1) {
+            histories.splice(historyExistIndex, 1);
+            histories.unshift(action.history);
+        } else {
+            histories.unshift(action.history);
+        }
         return {
             ...state,
-            visitHistory: [
-                action.history,
-                ...state.visitHistory,
-            ]
+            visitHistory: [...histories]
         }
 
     }),

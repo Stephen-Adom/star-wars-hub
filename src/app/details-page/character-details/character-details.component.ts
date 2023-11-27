@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AppState, getCharacterDetail } from 'src/shared/store/app.reducer';
 import { Store } from '@ngrx/store';
@@ -7,6 +7,7 @@ import { PeopleType, PlanetType, SpeciesType, StarshipType, VehicleType } from '
 import { HttpClient } from '@angular/common/http';
 import { BASE_URI } from 'src/shared/api.service';
 import { AppApiActions } from 'src/shared/store/app.actions';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-character-details',
@@ -15,7 +16,7 @@ import { AppApiActions } from 'src/shared/store/app.actions';
   templateUrl: './character-details.component.html',
   styleUrls: ['./character-details.component.scss']
 })
-export class CharacterDetailsComponent implements OnInit {
+export class CharacterDetailsComponent implements OnInit, OnDestroy {
   characterDetails!: PeopleType;
   dataId!: string;
   category!: string;
@@ -23,6 +24,10 @@ export class CharacterDetailsComponent implements OnInit {
   species: SpeciesType[] = [];
   starships: StarshipType[] = [];
   vehicles: VehicleType[] = [];
+  routeSubscription = new Subscription();
+  characterDetailSubscription = new Subscription();
+  httpSubscription = new Subscription();
+  httpHomeworldSubscription = new Subscription();
 
   constructor(
     private http: HttpClient,
@@ -31,13 +36,13 @@ export class CharacterDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(data => {
+    this.routeSubscription = this.route.paramMap.subscribe(data => {
       this.dataId = data.get('id')!;
       this.category = data.get('category')!;
     })
 
 
-    this.store.select(getCharacterDetail).subscribe((data) => {
+    this.characterDetailSubscription = this.store.select(getCharacterDetail).subscribe((data) => {
       if (data) {
         this.characterDetails = data;
         this.saveVisit();
@@ -52,7 +57,7 @@ export class CharacterDetailsComponent implements OnInit {
   }
 
   fetchCharacterDetails() {
-    this.http.get(BASE_URI + 'people/' + this.dataId).subscribe((data: any) => {
+    this.httpSubscription = this.http.get(BASE_URI + 'people/' + this.dataId).subscribe((data: any) => {
       if (data) {
         this.store.dispatch(AppApiActions.displayCharacterDetails({ character: data }))
       }
@@ -60,7 +65,7 @@ export class CharacterDetailsComponent implements OnInit {
   }
 
   fetchHomeWorldDetails() {
-    this.http.get(this.characterDetails.homeworld).subscribe((data: any) => {
+    this.httpHomeworldSubscription = this.http.get(this.characterDetails.homeworld).subscribe((data: any) => {
       if (data) {
         this.homeWorldDetails = data;
       }
@@ -112,5 +117,12 @@ export class CharacterDetailsComponent implements OnInit {
         lastVisited: new Date()
       }
     }));
+  }
+
+  ngOnDestroy(): void {
+    this.routeSubscription.unsubscribe();
+    this.characterDetailSubscription.unsubscribe();
+    this.httpSubscription.unsubscribe();
+    this.httpHomeworldSubscription.unsubscribe();
   }
 }

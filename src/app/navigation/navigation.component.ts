@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { Observable, debounceTime, distinctUntilChanged, fromEvent, map } from 'rxjs';
@@ -16,7 +16,7 @@ import { Store } from '@ngrx/store';
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.scss']
 })
-export class NavigationComponent implements AfterViewInit {
+export class NavigationComponent implements OnInit, AfterViewInit {
   @ViewChild('searchInput') searchInput!: ElementRef<HTMLInputElement>;
   searching = false;
   recentHistories$!: Observable<{
@@ -33,10 +33,13 @@ export class NavigationComponent implements AfterViewInit {
     private router: Router
   ) { }
 
-  ngAfterViewInit(): void {
+  ngOnInit(): void {
     this.recentHistories$ = this.store.select(getVisitHistory).pipe(
       map(histories => histories.slice(0, 3))
     )
+  }
+
+  ngAfterViewInit(): void {
 
     fromEvent(this.searchInput.nativeElement, 'input').pipe(
       debounceTime(800),

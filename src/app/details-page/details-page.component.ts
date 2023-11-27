@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -8,6 +8,9 @@ import { PlanetDetailsComponent } from './planet-details/planet-details.componen
 import { SpeciesDetailsComponent } from './species-details/species-details.component';
 import { StarshipDetailsComponent } from './starship-details/starship-details.component';
 import { VehicleDetailsComponent } from './vehicle-details/vehicle-details.component';
+import { AppState } from 'src/shared/store/app.reducer';
+import { Store } from '@ngrx/store';
+import { AppApiActions } from 'src/shared/store/app.actions';
 
 @Component({
   selector: 'app-details-page',
@@ -24,12 +27,13 @@ import { VehicleDetailsComponent } from './vehicle-details/vehicle-details.compo
   templateUrl: './details-page.component.html',
   styleUrls: ['./details-page.component.scss'],
 })
-export class DetailsPageComponent {
+export class DetailsPageComponent implements OnDestroy {
   routeSubscription = new Subscription();
   category!: string | null;
 
 
   constructor(
+    private store: Store<AppState>,
     private route: ActivatedRoute,
     private location: Location
   ) { }
@@ -42,5 +46,9 @@ export class DetailsPageComponent {
 
   goBack() {
     this.location.back();
+  }
+
+  ngOnDestroy(): void {
+    this.store.dispatch(AppApiActions.clearData());
   }
 }

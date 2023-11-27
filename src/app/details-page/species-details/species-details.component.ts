@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { PlanetType, SpeciesType } from 'src/shared/data.types';
@@ -16,12 +16,15 @@ import { AppState, getPlanetDetail, getSpeciesDetail } from 'src/shared/store/ap
   templateUrl: './species-details.component.html',
   styleUrls: ['./species-details.component.scss']
 })
-export class SpeciesDetailsComponent {
+export class SpeciesDetailsComponent implements OnInit, OnDestroy {
   dataId!: string;
   category!: string;
   speciesDetailsSubscription = new Subscription();
   speciesDetails!: SpeciesType;
   homeWorldDetails!: PlanetType;
+  routeParamSubscription = new Subscription();
+  httpSpeciesSubscription = new Subscription();
+  httpHomeworldSubscription = new Subscription();
 
   constructor(
     private http: HttpClient,
@@ -30,7 +33,7 @@ export class SpeciesDetailsComponent {
   ) { }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(data => {
+    this.routeParamSubscription = this.route.paramMap.subscribe(data => {
       this.dataId = data.get('id')!;
       this.category = data.get('category')!
     })
@@ -49,7 +52,7 @@ export class SpeciesDetailsComponent {
 
 
   fetchHomeWorldDetails() {
-    this.http.get(this.speciesDetails.homeworld).subscribe((data: any) => {
+    this.httpHomeworldSubscription = this.http.get(this.speciesDetails.homeworld).subscribe((data: any) => {
       if (data) {
         this.homeWorldDetails = data;
       }
@@ -57,7 +60,7 @@ export class SpeciesDetailsComponent {
   }
 
   fetchSpeciesDetails() {
-    this.http.get(BASE_URI + 'species/' + this.dataId).subscribe((data: any) => {
+    this.httpSpeciesSubscription = this.http.get(BASE_URI + 'species/' + this.dataId).subscribe((data: any) => {
       if (data) {
         this.store.dispatch(AppApiActions.displaySpeciesDetails({ species: data }))
       }
@@ -73,5 +76,12 @@ export class SpeciesDetailsComponent {
         lastVisited: new Date()
       }
     }));
+  }
+
+  ngOnDestroy(): void {
+    this.speciesDetailsSubscription.unsubscribe();
+    this.routeParamSubscription.unsubscribe();
+    this.httpSpeciesSubscription.unsubscribe();
+    this.httpHomeworldSubscription.unsubscribe();
   }
 }
