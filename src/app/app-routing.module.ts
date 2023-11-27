@@ -12,22 +12,22 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: HomeComponent
+        component: HomeComponent,
       },
       {
         path: ':category/list',
-        component: ListerPageComponent
+        component: ListerPageComponent,
       },
       {
         path: ':category/details/:id',
-        component: DetailsPageComponent
-      }
-    ]
-  }
+        component: DetailsPageComponent,
+      },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

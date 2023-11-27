@@ -19,12 +19,16 @@ describe('VehicleDetailsComponent', () => {
   beforeEach(() => {
     const storeSpyObj = jasmine.createSpyObj('Store', ['dispatch', 'select']);
     const routeMockObj = {
-      paramMap: { subscribe: jasmine.createSpy() }
+      paramMap: { subscribe: jasmine.createSpy() },
     };
 
     TestBed.configureTestingModule({
       declarations: [],
-      imports: [HttpClientTestingModule, StoreModule.forRoot({}), VehicleDetailsComponent],
+      imports: [
+        HttpClientTestingModule,
+        StoreModule.forRoot({}),
+        VehicleDetailsComponent,
+      ],
       providers: [
         { provide: Store, useValue: storeSpyObj },
         { provide: ActivatedRoute, useValue: routeMockObj },
@@ -35,7 +39,9 @@ describe('VehicleDetailsComponent', () => {
     component = fixture.componentInstance;
     storeSpy = TestBed.inject(Store) as jasmine.SpyObj<Store>;
     httpSpy = TestBed.inject(HttpClient) as jasmine.SpyObj<HttpClient>;
-    routeMock = TestBed.inject(ActivatedRoute) as unknown as { paramMap: { subscribe: jasmine.Spy } };
+    routeMock = TestBed.inject(ActivatedRoute) as unknown as {
+      paramMap: { subscribe: jasmine.Spy };
+    };
 
     storeSpy.select.and.returnValue(of(null));
     routeMock.paramMap.subscribe.and.returnValue(of(null));
@@ -64,7 +70,7 @@ describe('VehicleDetailsComponent', () => {
       edited: 'test',
       url: 'test',
     };
-    routeMock.paramMap.subscribe.and.callFake(callback => {
+    routeMock.paramMap.subscribe.and.callFake((callback) => {
       callback({ get: () => '1' });
     });
     storeSpy.select.and.returnValue(of(null));
@@ -73,7 +79,9 @@ describe('VehicleDetailsComponent', () => {
 
     fixture.detectChanges();
     expect(httpSpy.get).toHaveBeenCalledWith(`${BASE_URI}vehicles/1`);
-    expect(storeSpy.dispatch).toHaveBeenCalledWith(AppApiActions.displayVehicleDetails({ vehicle: mockData }));
+    expect(storeSpy.dispatch).toHaveBeenCalledWith(
+      AppApiActions.displayVehicleDetails({ vehicle: mockData })
+    );
   });
 
   it('should save visit when vehicle details are available', () => {
@@ -95,7 +103,7 @@ describe('VehicleDetailsComponent', () => {
       edited: 'test',
       url: 'test',
     };
-    routeMock.paramMap.subscribe.and.callFake(callback => {
+    routeMock.paramMap.subscribe.and.callFake((callback) => {
       callback({ get: () => '1' });
     });
     storeSpy.select.and.returnValue(of(mockVehicleDetails));

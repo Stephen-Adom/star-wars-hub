@@ -13,9 +13,13 @@ describe('DetailsPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DetailsPageComponent, RouterTestingModule, HttpClientTestingModule, StoreModule.forRoot({ app: AppReducer })]
-    })
-      .compileComponents();
+      imports: [
+        DetailsPageComponent,
+        RouterTestingModule,
+        HttpClientTestingModule,
+        StoreModule.forRoot({ app: AppReducer }),
+      ],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(DetailsPageComponent);
     component = fixture.componentInstance;
@@ -27,52 +31,68 @@ describe('DetailsPageComponent', () => {
   });
 
   it('should render category name in DOM', () => {
-    component.category = "people";
+    component.category = 'people';
     fixture.detectChanges();
-    const categoryElement = fixture.debugElement.query(By.css('.category-title'));
+    const categoryElement = fixture.debugElement.query(
+      By.css('.category-title')
+    );
     expect(categoryElement).toBeTruthy();
-    expect(categoryElement.nativeElement.textContent).toContain('People Details');
-  })
+    expect(categoryElement.nativeElement.textContent).toContain(
+      'People Details'
+    );
+  });
 
   it('should render character component', () => {
-    component.category = "people";
+    component.category = 'people';
     fixture.detectChanges();
-    const characterElement = fixture.debugElement.query(By.css('app-character-details'));
+    const characterElement = fixture.debugElement.query(
+      By.css('app-character-details')
+    );
     expect(characterElement).toBeTruthy();
-  })
+  });
 
   it('should render films component', () => {
-    component.category = "films";
+    component.category = 'films';
     fixture.detectChanges();
-    const filmsElement = fixture.debugElement.query(By.css('app-films-details'));
+    const filmsElement = fixture.debugElement.query(
+      By.css('app-films-details')
+    );
     expect(filmsElement).toBeTruthy();
-  })
+  });
 
   it('should render planet component', () => {
-    component.category = "planets";
+    component.category = 'planets';
     fixture.detectChanges();
-    const planetElement = fixture.debugElement.query(By.css('app-planet-details'));
+    const planetElement = fixture.debugElement.query(
+      By.css('app-planet-details')
+    );
     expect(planetElement).toBeTruthy();
-  })
+  });
 
   it('should render species component', () => {
-    component.category = "species";
+    component.category = 'species';
     fixture.detectChanges();
-    const speciesElement = fixture.debugElement.query(By.css('app-species-details'));
+    const speciesElement = fixture.debugElement.query(
+      By.css('app-species-details')
+    );
     expect(speciesElement).toBeTruthy();
-  })
+  });
 
   it('should render starships component', () => {
-    component.category = "starships";
+    component.category = 'starships';
     fixture.detectChanges();
-    const starshipElement = fixture.debugElement.query(By.css('app-starship-details'));
+    const starshipElement = fixture.debugElement.query(
+      By.css('app-starship-details')
+    );
     expect(starshipElement).toBeTruthy();
-  })
+  });
 
   it('should render vehicle component', () => {
-    component.category = "vehicles";
+    component.category = 'vehicles';
     fixture.detectChanges();
-    const vehicleElement = fixture.debugElement.query(By.css('app-vehicle-details'));
+    const vehicleElement = fixture.debugElement.query(
+      By.css('app-vehicle-details')
+    );
     expect(vehicleElement).toBeTruthy();
-  })
+  });
 });

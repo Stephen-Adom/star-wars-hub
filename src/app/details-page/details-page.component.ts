@@ -22,7 +22,7 @@ import { AppApiActions } from 'src/shared/store/app.actions';
     PlanetDetailsComponent,
     SpeciesDetailsComponent,
     StarshipDetailsComponent,
-    VehicleDetailsComponent
+    VehicleDetailsComponent,
   ],
   templateUrl: './details-page.component.html',
   styleUrls: ['./details-page.component.scss'],
@@ -31,12 +31,11 @@ export class DetailsPageComponent implements OnInit, OnDestroy {
   routeSubscription: Subscription | null = new Subscription();
   category!: string | null;
 
-
   constructor(
     private store: Store<AppState>,
     private route: ActivatedRoute,
     private location: Location
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.routeSubscription = this.route.paramMap.subscribe((data) => {

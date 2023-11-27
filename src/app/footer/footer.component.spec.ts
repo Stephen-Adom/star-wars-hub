@@ -10,9 +10,8 @@ describe('FooterComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FooterComponent, RouterTestingModule]
-    })
-      .compileComponents();
+      imports: [FooterComponent, RouterTestingModule],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(FooterComponent);
     component = fixture.componentInstance;
@@ -25,10 +24,10 @@ describe('FooterComponent', () => {
 
   it('should render footer element', () => {
     const footer = fixture.debugElement.query(By.css('footer'));
-    expect(footer.nativeElement).toBeTruthy()
-  })
+    expect(footer.nativeElement).toBeTruthy();
+  });
 
   it('should render current year', () => {
     expect(component.year).toEqual(new Date().getFullYear());
-  })
+  });
 });

@@ -15,7 +15,7 @@ import { Store } from '@ngrx/store';
   standalone: true,
   imports: [CommonModule, DialogModule],
   templateUrl: './search-result-dialog.component.html',
-  styleUrls: ['./search-result-dialog.component.scss']
+  styleUrls: ['./search-result-dialog.component.scss'],
 })
 export class SearchResultDialogComponent implements OnInit, OnDestroy {
   visible = true;
@@ -26,19 +26,22 @@ export class SearchResultDialogComponent implements OnInit, OnDestroy {
   constructor(
     private resultservice: SearchResultService,
     private store: Store<AppState>,
-    private router: Router,
-  ) { }
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    this.visibilitySubscription = this.resultservice.toggleDialogVisibilityObservable.subscribe(data => {
-      this.visible = data;
-    })
+    this.visibilitySubscription =
+      this.resultservice.toggleDialogVisibilityObservable.subscribe((data) => {
+        this.visible = data;
+      });
 
-    this.resultSubscription = this.resultservice.resultDataObservable.subscribe(data => {
-      if (data) {
-        this.result = data;
+    this.resultSubscription = this.resultservice.resultDataObservable.subscribe(
+      (data) => {
+        if (data) {
+          this.result = data;
+        }
       }
-    })
+    );
   }
 
   onHide() {
@@ -50,7 +53,7 @@ export class SearchResultDialogComponent implements OnInit, OnDestroy {
       AppApiActions.displayCharacterDetails({ character: info })
     );
     const id = info.url.split(BASE_URI + 'people/')[1].split('/')[0];
-    this.router.navigate(["people", "details", id]);
+    this.router.navigate(['people', 'details', id]);
     this.onHide();
   }
 

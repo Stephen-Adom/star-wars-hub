@@ -9,9 +9,8 @@ describe('HomeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HomeComponent, RouterTestingModule]
-    })
-      .compileComponents();
+      imports: [HomeComponent, RouterTestingModule],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(HomeComponent);
     component = fixture.componentInstance;
@@ -26,7 +25,9 @@ describe('HomeComponent', () => {
     spyOn(component.swiperContainer.nativeElement, 'initialize');
     component.ngAfterViewInit();
     fixture.detectChanges();
-    expect(component.swiperContainer.nativeElement.initialize).toHaveBeenCalled();
+    expect(
+      component.swiperContainer.nativeElement.initialize
+    ).toHaveBeenCalled();
   });
 
   it('should display info cards in the template', () => {

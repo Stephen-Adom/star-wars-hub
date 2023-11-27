@@ -14,7 +14,7 @@ import { AppState, getStarshipDetail } from 'src/shared/store/app.reducer';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './starship-details.component.html',
-  styleUrls: ['./starship-details.component.scss']
+  styleUrls: ['./starship-details.component.scss'],
 })
 export class StarshipDetailsComponent implements OnInit, OnDestroy {
   dataId!: string;
@@ -27,48 +27,55 @@ export class StarshipDetailsComponent implements OnInit, OnDestroy {
   constructor(
     private http: HttpClient,
     private route: ActivatedRoute,
-    private store: Store<AppState>,
-  ) { }
+    private store: Store<AppState>
+  ) {}
 
   ngOnInit(): void {
-    this.routeParamSubscription = this.route.paramMap.subscribe(data => {
+    this.routeParamSubscription = this.route.paramMap.subscribe((data) => {
       this.dataId = data.get('id')!;
-      this.category = data.get('category')!
-    })
+      this.category = data.get('category')!;
+    });
 
-
-    this.starshipDetailsSubscription = this.store.select(getStarshipDetail).subscribe((data) => {
-      if (data) {
-        this.starshipDetails = data;
-        this.saveVisit();
-      } else {
-        this.fetchStarshipDetails();
-      }
-    })
+    this.starshipDetailsSubscription = this.store
+      .select(getStarshipDetail)
+      .subscribe((data) => {
+        if (data) {
+          this.starshipDetails = data;
+          this.saveVisit();
+        } else {
+          this.fetchStarshipDetails();
+        }
+      });
   }
 
   fetchStarshipDetails() {
-    this.httpSubscription = this.http.get(BASE_URI + 'starships/' + this.dataId).subscribe((data: any) => {
-      if (data) {
-        this.store.dispatch(AppApiActions.displayStarshipDetails({ starship: data }))
-      }
-    })
+    this.httpSubscription = this.http
+      .get(BASE_URI + 'starships/' + this.dataId)
+      .subscribe((data: any) => {
+        if (data) {
+          this.store.dispatch(
+            AppApiActions.displayStarshipDetails({ starship: data })
+          );
+        }
+      });
   }
 
   saveVisit() {
-    this.store.dispatch(AppApiActions.updateVisitHistory({
-      history: {
-        name: this.starshipDetails.name,
-        category: this.category as string,
-        id: parseInt(this.dataId!),
-        lastVisited: new Date()
-      }
-    }));
+    this.store.dispatch(
+      AppApiActions.updateVisitHistory({
+        history: {
+          name: this.starshipDetails.name,
+          category: this.category as string,
+          id: parseInt(this.dataId!),
+          lastVisited: new Date(),
+        },
+      })
+    );
   }
 
   ngOnDestroy(): void {
-    this.starshipDetailsSubscription?.unsubscribe()
-    this.routeParamSubscription?.unsubscribe()
-    this.httpSubscription?.unsubscribe()
+    this.starshipDetailsSubscription?.unsubscribe();
+    this.routeParamSubscription?.unsubscribe();
+    this.httpSubscription?.unsubscribe();
   }
 }

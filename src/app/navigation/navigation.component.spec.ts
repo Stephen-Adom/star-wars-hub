@@ -13,19 +13,29 @@ describe('NavigationComponent', () => {
   let fixture: ComponentFixture<NavigationComponent>;
   let searchResultServiceSpy: jasmine.SpyObj<SearchResultService>;
   let storeSpy: jasmine.SpyObj<Store>;
-  let mockRecentHistories: BehaviorSubject<{
-    name: string,
-    category: string,
-    id: number,
-    lastVisited: Date
-  }[]>;
+  let mockRecentHistories: BehaviorSubject<
+    {
+      name: string;
+      category: string;
+      id: number;
+      lastVisited: Date;
+    }[]
+  >;
 
   beforeEach(() => {
-    const searchResultServiceSpyObj = jasmine.createSpyObj('SearchResultService', ['sendResult', 'toggleDialogVisibility']);
+    const searchResultServiceSpyObj = jasmine.createSpyObj(
+      'SearchResultService',
+      ['sendResult', 'toggleDialogVisibility']
+    );
     const storeSpyObj = jasmine.createSpyObj('Store', ['select']);
 
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, RouterTestingModule, StoreModule.forRoot({}), NavigationComponent],
+      imports: [
+        HttpClientTestingModule,
+        RouterTestingModule,
+        StoreModule.forRoot({}),
+        NavigationComponent,
+      ],
       declarations: [],
       providers: [
         { provide: SearchResultService, useValue: searchResultServiceSpyObj },
@@ -35,15 +45,19 @@ describe('NavigationComponent', () => {
 
     fixture = TestBed.createComponent(NavigationComponent);
     component = fixture.componentInstance;
-    searchResultServiceSpy = TestBed.inject(SearchResultService) as jasmine.SpyObj<SearchResultService>;
+    searchResultServiceSpy = TestBed.inject(
+      SearchResultService
+    ) as jasmine.SpyObj<SearchResultService>;
     storeSpy = TestBed.inject(Store) as jasmine.SpyObj<Store>;
 
-    mockRecentHistories = new BehaviorSubject<{
-      name: string,
-      category: string,
-      id: number,
-      lastVisited: Date
-    }[]>([]);
+    mockRecentHistories = new BehaviorSubject<
+      {
+        name: string;
+        category: string;
+        id: number;
+        lastVisited: Date;
+      }[]
+    >([]);
     storeSpy.select.and.returnValue(mockRecentHistories);
   });
 
@@ -61,13 +75,14 @@ describe('NavigationComponent', () => {
     const { debugElement } = fixture;
     const linkElement = debugElement.query(By.css('.lister-link'));
     expect(linkElement).toBeTruthy();
-    expect(linkElement.nativeElement.textContent).toContain('Browse Characters');
-  })
+    expect(linkElement.nativeElement.textContent).toContain(
+      'Browse Characters'
+    );
+  });
 
   it('should render search input', () => {
     const { debugElement } = fixture;
     const searchElement = debugElement.query(By.css('input'));
     expect(searchElement).toBeTruthy();
-  })
-
+  });
 });

@@ -19,12 +19,16 @@ describe('PlanetDetailsComponent', () => {
   beforeEach(() => {
     const storeSpyObj = jasmine.createSpyObj('Store', ['dispatch', 'select']);
     const routeMockObj = {
-      paramMap: { subscribe: jasmine.createSpy() }
+      paramMap: { subscribe: jasmine.createSpy() },
     };
 
     TestBed.configureTestingModule({
       declarations: [],
-      imports: [HttpClientTestingModule, PlanetDetailsComponent, StoreModule.forRoot({})],
+      imports: [
+        HttpClientTestingModule,
+        PlanetDetailsComponent,
+        StoreModule.forRoot({}),
+      ],
       providers: [
         { provide: Store, useValue: storeSpyObj },
         { provide: ActivatedRoute, useValue: routeMockObj },
@@ -35,7 +39,9 @@ describe('PlanetDetailsComponent', () => {
     component = fixture.componentInstance;
     storeSpy = TestBed.inject(Store) as jasmine.SpyObj<Store>;
     httpSpy = TestBed.inject(HttpClient) as jasmine.SpyObj<HttpClient>;
-    routeMock = TestBed.inject(ActivatedRoute) as unknown as { paramMap: { subscribe: jasmine.Spy } };
+    routeMock = TestBed.inject(ActivatedRoute) as unknown as {
+      paramMap: { subscribe: jasmine.Spy };
+    };
 
     storeSpy.select.and.returnValue(of(null));
     routeMock.paramMap.subscribe.and.returnValue(of(null));
@@ -47,7 +53,7 @@ describe('PlanetDetailsComponent', () => {
 
   it('should fetch planet details when data is not available', () => {
     const mockData: any = {};
-    routeMock.paramMap.subscribe.and.callFake(callback => {
+    routeMock.paramMap.subscribe.and.callFake((callback) => {
       callback({ get: () => '1' });
     });
     storeSpy.select.and.returnValue(of(null));
@@ -56,7 +62,9 @@ describe('PlanetDetailsComponent', () => {
 
     fixture.detectChanges();
     expect(httpSpy.get).toHaveBeenCalledWith(`${BASE_URI}planets/1`);
-    expect(storeSpy.dispatch).toHaveBeenCalledWith(AppApiActions.displayPlanetDetails({ planet: mockData }));
+    expect(storeSpy.dispatch).toHaveBeenCalledWith(
+      AppApiActions.displayPlanetDetails({ planet: mockData })
+    );
   });
 
   it('should save visit when planet details are available', () => {
@@ -76,7 +84,7 @@ describe('PlanetDetailsComponent', () => {
       edited: 'test',
       url: 'test',
     };
-    routeMock.paramMap.subscribe.and.callFake(callback => {
+    routeMock.paramMap.subscribe.and.callFake((callback) => {
       callback({ get: () => '1' });
     });
     storeSpy.select.and.returnValue(of(mockPlanetDetails));

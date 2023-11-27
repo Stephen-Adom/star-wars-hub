@@ -18,27 +18,33 @@ describe('ListerPageComponent', () => {
   beforeEach(() => {
     const storeSpyObj = jasmine.createSpyObj('Store', ['dispatch', 'select']);
     const routeMockObj = {
-      paramMap: { subscribe: jasmine.createSpy() }
+      paramMap: { subscribe: jasmine.createSpy() },
     };
     const locationMockObj = jasmine.createSpyObj('Location', ['back']);
     const routerMockObj = jasmine.createSpyObj('Router', ['navigate']);
 
     TestBed.configureTestingModule({
-      imports: [ListerPageComponent, StoreModule.forRoot({}), RouterTestingModule],
+      imports: [
+        ListerPageComponent,
+        StoreModule.forRoot({}),
+        RouterTestingModule,
+      ],
       declarations: [],
       providers: [
         { provide: Store, useValue: storeSpyObj },
         { provide: ActivatedRoute, useValue: routeMockObj },
         { provide: Location, useValue: locationMockObj },
         { provide: Router, useValue: routerMockObj },
-        ChangeDetectorRef
+        ChangeDetectorRef,
       ],
     });
 
     fixture = TestBed.createComponent(ListerPageComponent);
     component = fixture.componentInstance;
     storeSpy = TestBed.inject(Store) as jasmine.SpyObj<Store>;
-    routeMock = TestBed.inject(ActivatedRoute) as unknown as { paramMap: { subscribe: jasmine.Spy } };
+    routeMock = TestBed.inject(ActivatedRoute) as unknown as {
+      paramMap: { subscribe: jasmine.Spy };
+    };
     locationMock = TestBed.inject(Location) as jasmine.SpyObj<Location>;
     routerMock = TestBed.inject(Router) as jasmine.SpyObj<Router>;
 
@@ -57,31 +63,25 @@ describe('ListerPageComponent', () => {
 
   it('should view details', () => {
     const info = {
-      name: "Luke Skywalker",
-      height: "172",
-      mass: "77",
-      hair_color: "blond",
-      skin_color: "fair",
-      eye_color: "blue",
-      birth_year: "19BBY",
-      gender: "male",
-      homeworld: "https://swapi.dev/api/planets/1/",
-      films: [
-        "https://swapi.dev/api/films/2/",
-      ],
-      species: [
-        "https://swapi.dev/api/species/1/"
-      ],
+      name: 'Luke Skywalker',
+      height: '172',
+      mass: '77',
+      hair_color: 'blond',
+      skin_color: 'fair',
+      eye_color: 'blue',
+      birth_year: '19BBY',
+      gender: 'male',
+      homeworld: 'https://swapi.dev/api/planets/1/',
+      films: ['https://swapi.dev/api/films/2/'],
+      species: ['https://swapi.dev/api/species/1/'],
       vehicles: [
-        "https://swapi.dev/api/vehicles/14/",
-        "https://swapi.dev/api/vehicles/30/"
+        'https://swapi.dev/api/vehicles/14/',
+        'https://swapi.dev/api/vehicles/30/',
       ],
-      starships: [
-        "https://swapi.dev/api/starships/12/",
-      ],
-      created: "2014-12-09T13:50:51.644000Z",
-      edited: "2014-12-20T21:17:56.891000Z",
-      url: "https://swapi.dev/api/people/1/"
+      starships: ['https://swapi.dev/api/starships/12/'],
+      created: '2014-12-09T13:50:51.644000Z',
+      edited: '2014-12-20T21:17:56.891000Z',
+      url: 'https://swapi.dev/api/people/1/',
     };
     component.category = 'people';
 

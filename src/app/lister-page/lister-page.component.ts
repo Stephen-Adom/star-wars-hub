@@ -1,4 +1,10 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { Table, TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
@@ -280,7 +286,7 @@ export class ListerPageComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private location: Location,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.routeSubscription = this.route.paramMap.subscribe((data) => {
@@ -315,7 +321,7 @@ export class ListerPageComponent implements OnInit, OnDestroy {
         rows: 10,
         sortField: 'name',
         sortOrder: 1,
-      })
+      });
     });
 
     this.loadingSubscription = this.store
@@ -324,13 +330,15 @@ export class ListerPageComponent implements OnInit, OnDestroy {
         this.loading = state;
       });
 
-    this.dataSubscription = this.store.select(getAllCharacters).subscribe((data) => {
-      if (data) {
-        this.totalRecords = data.count;
-        this.data = data.results;
-        this.cdr.detectChanges();
-      }
-    });
+    this.dataSubscription = this.store
+      .select(getAllCharacters)
+      .subscribe((data) => {
+        if (data) {
+          this.totalRecords = data.count;
+          this.data = data.results;
+          this.cdr.detectChanges();
+        }
+      });
 
     this.dataSubscription = this.store.select(getAllFilms).subscribe((data) => {
       if (data) {
@@ -340,37 +348,45 @@ export class ListerPageComponent implements OnInit, OnDestroy {
       }
     });
 
-    this.dataSubscription = this.store.select(getAllPlanets).subscribe((data) => {
-      if (data) {
-        this.totalRecords = data.count;
-        this.data = data.results;
-        this.cdr.detectChanges();
-      }
-    });
+    this.dataSubscription = this.store
+      .select(getAllPlanets)
+      .subscribe((data) => {
+        if (data) {
+          this.totalRecords = data.count;
+          this.data = data.results;
+          this.cdr.detectChanges();
+        }
+      });
 
-    this.dataSubscription = this.store.select(getAllSpecies).subscribe((data) => {
-      if (data) {
-        this.totalRecords = data.count;
-        this.data = data.results;
-        this.cdr.detectChanges();
-      }
-    });
+    this.dataSubscription = this.store
+      .select(getAllSpecies)
+      .subscribe((data) => {
+        if (data) {
+          this.totalRecords = data.count;
+          this.data = data.results;
+          this.cdr.detectChanges();
+        }
+      });
 
-    this.dataSubscription = this.store.select(getAllStarships).subscribe((data) => {
-      if (data) {
-        this.totalRecords = data.count;
-        this.data = data.results;
-        this.cdr.detectChanges();
-      }
-    });
+    this.dataSubscription = this.store
+      .select(getAllStarships)
+      .subscribe((data) => {
+        if (data) {
+          this.totalRecords = data.count;
+          this.data = data.results;
+          this.cdr.detectChanges();
+        }
+      });
 
-    this.dataSubscription = this.store.select(getAllVehicles).subscribe((data) => {
-      if (data) {
-        this.totalRecords = data.count;
-        this.data = data.results;
-        this.cdr.detectChanges();
-      }
-    });
+    this.dataSubscription = this.store
+      .select(getAllVehicles)
+      .subscribe((data) => {
+        if (data) {
+          this.totalRecords = data.count;
+          this.data = data.results;
+          this.cdr.detectChanges();
+        }
+      });
   }
 
   lazyLoadData(event: LazyLoadEvent) {
@@ -415,8 +431,6 @@ export class ListerPageComponent implements OnInit, OnDestroy {
           );
           break;
       }
-
-
     }
   }
 
@@ -436,9 +450,7 @@ export class ListerPageComponent implements OnInit, OnDestroy {
         );
         break;
       case 'films':
-        this.store.dispatch(
-          AppApiActions.displayFilmDetails({ film: info })
-        );
+        this.store.dispatch(AppApiActions.displayFilmDetails({ film: info }));
         break;
       case 'planets':
         this.store.dispatch(

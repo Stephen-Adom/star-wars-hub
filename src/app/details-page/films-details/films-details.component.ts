@@ -15,7 +15,7 @@ import { format } from 'date-fns';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './films-details.component.html',
-  styleUrls: ['./films-details.component.scss']
+  styleUrls: ['./films-details.component.scss'],
 })
 export class FilmsDetailsComponent implements OnInit, OnDestroy {
   dataId!: string;
@@ -28,32 +28,35 @@ export class FilmsDetailsComponent implements OnInit, OnDestroy {
   constructor(
     private http: HttpClient,
     private route: ActivatedRoute,
-    private store: Store<AppState>,
-  ) { }
+    private store: Store<AppState>
+  ) {}
 
   ngOnInit(): void {
-    this.routeParamSubscription = this.route.paramMap.subscribe(data => {
+    this.routeParamSubscription = this.route.paramMap.subscribe((data) => {
       this.dataId = data.get('id')!;
-      this.category = data.get('category')!
-    })
+      this.category = data.get('category')!;
+    });
 
-
-    this.filmDetailsSubscription = this.store.select(getFilmDetail).subscribe((data) => {
-      if (data) {
-        this.filmDetails = data;
-        this.saveVisit();
-      } else {
-        this.fetchFilmDetails();
-      }
-    })
+    this.filmDetailsSubscription = this.store
+      .select(getFilmDetail)
+      .subscribe((data) => {
+        if (data) {
+          this.filmDetails = data;
+          this.saveVisit();
+        } else {
+          this.fetchFilmDetails();
+        }
+      });
   }
 
   fetchFilmDetails() {
-    this.httpSubscription = this.http.get(BASE_URI + 'films/' + this.dataId).subscribe((data: any) => {
-      if (data) {
-        this.store.dispatch(AppApiActions.displayFilmDetails({ film: data }))
-      }
-    })
+    this.httpSubscription = this.http
+      .get(BASE_URI + 'films/' + this.dataId)
+      .subscribe((data: any) => {
+        if (data) {
+          this.store.dispatch(AppApiActions.displayFilmDetails({ film: data }));
+        }
+      });
   }
 
   formatDate(date: string) {
@@ -67,13 +70,15 @@ export class FilmsDetailsComponent implements OnInit, OnDestroy {
   }
 
   saveVisit() {
-    this.store.dispatch(AppApiActions.updateVisitHistory({
-      history: {
-        name: this.filmDetails.title,
-        category: this.category as string,
-        id: parseInt(this.dataId!),
-        lastVisited: new Date()
-      }
-    }));
+    this.store.dispatch(
+      AppApiActions.updateVisitHistory({
+        history: {
+          name: this.filmDetails.title,
+          category: this.category as string,
+          id: parseInt(this.dataId!),
+          lastVisited: new Date(),
+        },
+      })
+    );
   }
 }

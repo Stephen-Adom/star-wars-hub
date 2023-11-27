@@ -1,4 +1,9 @@
-import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  TestBed,
+  fakeAsync,
+  tick,
+} from '@angular/core/testing';
 
 import { CharacterDetailsComponent } from './character-details.component';
 import { Store, StoreModule } from '@ngrx/store';
@@ -19,12 +24,16 @@ describe('CharacterDetailsComponent', () => {
   beforeEach(() => {
     const storeSpyObj = jasmine.createSpyObj('Store', ['dispatch', 'select']);
     const routeMockObj = {
-      paramMap: { subscribe: jasmine.createSpy() }
+      paramMap: { subscribe: jasmine.createSpy() },
     };
 
     TestBed.configureTestingModule({
       declarations: [],
-      imports: [HttpClientTestingModule, CharacterDetailsComponent, StoreModule.forRoot({})],
+      imports: [
+        HttpClientTestingModule,
+        CharacterDetailsComponent,
+        StoreModule.forRoot({}),
+      ],
       providers: [
         { provide: Store, useValue: storeSpyObj },
         { provide: ActivatedRoute, useValue: routeMockObj },
@@ -34,7 +43,9 @@ describe('CharacterDetailsComponent', () => {
     fixture = TestBed.createComponent(CharacterDetailsComponent);
     component = fixture.componentInstance;
     storeSpy = TestBed.inject(Store) as jasmine.SpyObj<Store>;
-    routeMock = TestBed.inject(ActivatedRoute) as unknown as { paramMap: { subscribe: jasmine.Spy } };
+    routeMock = TestBed.inject(ActivatedRoute) as unknown as {
+      paramMap: { subscribe: jasmine.Spy };
+    };
     httpSpy = TestBed.inject(HttpClient) as jasmine.SpyObj<HttpClient>;
 
     storeSpy.select.and.returnValue(of(null));
@@ -47,7 +58,7 @@ describe('CharacterDetailsComponent', () => {
 
   it('should fetch character details when data is not available', fakeAsync(() => {
     const mockData: any = {};
-    routeMock.paramMap.subscribe.and.callFake(callback => {
+    routeMock.paramMap.subscribe.and.callFake((callback) => {
       callback({ get: () => '1' });
     });
     storeSpy.select.and.returnValue(of(null));
@@ -58,7 +69,9 @@ describe('CharacterDetailsComponent', () => {
     tick();
 
     expect(httpSpy.get).toHaveBeenCalledWith(`${BASE_URI}people/1`);
-    expect(storeSpy.dispatch).toHaveBeenCalledWith(AppApiActions.displayCharacterDetails({ character: mockData }));
+    expect(storeSpy.dispatch).toHaveBeenCalledWith(
+      AppApiActions.displayCharacterDetails({ character: mockData })
+    );
   }));
 
   it('should save visit when character details are available', fakeAsync(() => {
@@ -80,7 +93,7 @@ describe('CharacterDetailsComponent', () => {
       edited: 'test',
       url: 'test',
     };
-    routeMock.paramMap.subscribe.and.callFake(callback => {
+    routeMock.paramMap.subscribe.and.callFake((callback) => {
       callback({ get: () => '1' });
     });
     storeSpy.select.and.returnValue(of(mockCharacterDetails));
@@ -89,5 +102,4 @@ describe('CharacterDetailsComponent', () => {
     tick();
     expect(storeSpy.dispatch).toHaveBeenCalled();
   }));
-
 });

@@ -19,12 +19,16 @@ describe('StarshipDetailsComponent', () => {
   beforeEach(() => {
     const storeSpyObj = jasmine.createSpyObj('Store', ['dispatch', 'select']);
     const routeMockObj = {
-      paramMap: { subscribe: jasmine.createSpy() }
+      paramMap: { subscribe: jasmine.createSpy() },
     };
 
     TestBed.configureTestingModule({
       declarations: [],
-      imports: [HttpClientTestingModule, StoreModule.forRoot({}), StarshipDetailsComponent],
+      imports: [
+        HttpClientTestingModule,
+        StoreModule.forRoot({}),
+        StarshipDetailsComponent,
+      ],
       providers: [
         { provide: Store, useValue: storeSpyObj },
         { provide: ActivatedRoute, useValue: routeMockObj },
@@ -35,7 +39,9 @@ describe('StarshipDetailsComponent', () => {
     component = fixture.componentInstance;
     storeSpy = TestBed.inject(Store) as jasmine.SpyObj<Store>;
     httpSpy = TestBed.inject(HttpClient) as jasmine.SpyObj<HttpClient>;
-    routeMock = TestBed.inject(ActivatedRoute) as unknown as { paramMap: { subscribe: jasmine.Spy } };
+    routeMock = TestBed.inject(ActivatedRoute) as unknown as {
+      paramMap: { subscribe: jasmine.Spy };
+    };
 
     storeSpy.select.and.returnValue(of(null));
     routeMock.paramMap.subscribe.and.returnValue(of(null));
@@ -47,7 +53,7 @@ describe('StarshipDetailsComponent', () => {
 
   it('should fetch starship details when data is not available', () => {
     const mockData: any = {};
-    routeMock.paramMap.subscribe.and.callFake(callback => {
+    routeMock.paramMap.subscribe.and.callFake((callback) => {
       callback({ get: () => '1' });
     });
     storeSpy.select.and.returnValue(of(null));
@@ -57,7 +63,9 @@ describe('StarshipDetailsComponent', () => {
     fixture.detectChanges();
 
     expect(httpSpy.get).toHaveBeenCalledWith(`${BASE_URI}starships/1`);
-    expect(storeSpy.dispatch).toHaveBeenCalledWith(AppApiActions.displayStarshipDetails({ starship: mockData }));
+    expect(storeSpy.dispatch).toHaveBeenCalledWith(
+      AppApiActions.displayStarshipDetails({ starship: mockData })
+    );
   });
 
   it('should save visit when starship details are available', () => {
@@ -74,7 +82,7 @@ describe('StarshipDetailsComponent', () => {
       consumables: 'test',
       vehicle_class: 'test',
     };
-    routeMock.paramMap.subscribe.and.callFake(callback => {
+    routeMock.paramMap.subscribe.and.callFake((callback) => {
       callback({ get: () => '1' });
     });
     storeSpy.select.and.returnValue(of(mockStarshipDetails));
