@@ -1,9 +1,12 @@
-<section class="grid grid-cols-[40%_60%]" *ngIf="speciesDetails">
+<section
+  class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-[40%_60%]"
+  *ngIf="speciesDetails"
+>
   <div></div>
   <section class="p-4 relative z-[3] mt-5">
     <h1 class="text-3xl font-bold">{{ speciesDetails.name }}</h1>
 
-    <div class="grid grid-cols-3 gap-2 mt-2">
+    <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 gap-2 mt-2">
       <div>
         <span class="block text-sm">Classification:</span>
         <span class="block text-sm text-yellow-600">{{
@@ -79,7 +82,7 @@
     <section class="" *ngIf="homeWorldDetails">
       <h6 class="mb-3 italic">Homeworld Info:</h6>
 
-      <div class="grid grid-cols-5 gap-3">
+      <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-5 gap-3">
         <div>
           <span class="block text-sm">Name:</span>
           <span class="block text-sm text-yellow-600">{{

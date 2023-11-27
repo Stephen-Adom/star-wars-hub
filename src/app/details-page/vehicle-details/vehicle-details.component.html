@@ -1,9 +1,12 @@
-<section class="grid grid-cols-[40%_60%]" *ngIf="vehicleDetails">
+<section
+  class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-[40%_60%]"
+  *ngIf="vehicleDetails"
+>
   <div></div>
   <section class="p-4 relative z-[3] mt-5">
     <h1 class="text-3xl font-bold">{{ vehicleDetails.name }}</h1>
 
-    <div class="grid grid-cols-3 gap-2 mt-2">
+    <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 gap-2 mt-2">
       <div>
         <span class="block text-sm">Model:</span>
         <span class="block text-sm text-yellow-600">{{
