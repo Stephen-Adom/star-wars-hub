@@ -19,10 +19,10 @@ import { AppState, getStarshipDetail } from 'src/shared/store/app.reducer';
 export class StarshipDetailsComponent implements OnInit, OnDestroy {
   dataId!: string;
   category!: string;
-  starshipDetailsSubscription = new Subscription();
+  starshipDetailsSubscription: Subscription | null = new Subscription();
   starshipDetails!: StarshipType;
-  routeParamSubscription = new Subscription();
-  httpSubscription = new Subscription();
+  routeParamSubscription: Subscription | null = new Subscription();
+  httpSubscription: Subscription | null = new Subscription();
 
   constructor(
     private http: HttpClient,
@@ -67,8 +67,8 @@ export class StarshipDetailsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.starshipDetailsSubscription.unsubscribe()
-    this.routeParamSubscription.unsubscribe()
-    this.httpSubscription.unsubscribe()
+    this.starshipDetailsSubscription?.unsubscribe()
+    this.routeParamSubscription?.unsubscribe()
+    this.httpSubscription?.unsubscribe()
   }
 }

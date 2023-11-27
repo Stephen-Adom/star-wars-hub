@@ -21,9 +21,9 @@ export class FilmsDetailsComponent implements OnInit, OnDestroy {
   dataId!: string;
   category!: string;
   filmDetails!: FilmType;
-  filmDetailsSubscription = new Subscription();
-  routeParamSubscription = new Subscription();
-  httpSubscription = new Subscription();
+  filmDetailsSubscription: Subscription | null = new Subscription();
+  routeParamSubscription: Subscription | null = new Subscription();
+  httpSubscription: Subscription | null = new Subscription();
 
   constructor(
     private http: HttpClient,
@@ -61,9 +61,9 @@ export class FilmsDetailsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.filmDetailsSubscription.unsubscribe();
-    this.httpSubscription.unsubscribe();
-    this.routeParamSubscription.unsubscribe();
+    this.filmDetailsSubscription?.unsubscribe();
+    this.httpSubscription?.unsubscribe();
+    this.routeParamSubscription?.unsubscribe();
   }
 
   saveVisit() {

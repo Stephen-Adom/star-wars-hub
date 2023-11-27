@@ -24,10 +24,10 @@ export class CharacterDetailsComponent implements OnInit, OnDestroy {
   species: SpeciesType[] = [];
   starships: StarshipType[] = [];
   vehicles: VehicleType[] = [];
-  routeSubscription = new Subscription();
-  characterDetailSubscription = new Subscription();
-  httpSubscription = new Subscription();
-  httpHomeworldSubscription = new Subscription();
+  routeSubscription: Subscription | null = new Subscription();
+  characterDetailSubscription: Subscription | null = new Subscription();
+  httpSubscription: Subscription | null = new Subscription();
+  httpHomeworldSubscription: Subscription | null = new Subscription();
 
   constructor(
     private http: HttpClient,
@@ -120,9 +120,9 @@ export class CharacterDetailsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.routeSubscription.unsubscribe();
-    this.characterDetailSubscription.unsubscribe();
-    this.httpSubscription.unsubscribe();
-    this.httpHomeworldSubscription.unsubscribe();
+    this.routeSubscription?.unsubscribe();
+    this.characterDetailSubscription?.unsubscribe();
+    this.httpSubscription?.unsubscribe();
+    this.httpHomeworldSubscription?.unsubscribe();
   }
 }

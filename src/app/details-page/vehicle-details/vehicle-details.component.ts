@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { VehicleType } from 'src/shared/data.types';
 import { Subscription } from 'rxjs';
@@ -14,53 +14,68 @@ import { AppState, getVehicleDetail } from 'src/shared/store/app.reducer';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './vehicle-details.component.html',
-  styleUrls: ['./vehicle-details.component.scss']
+  styleUrls: ['./vehicle-details.component.scss'],
 })
-export class VehicleDetailsComponent {
+export class VehicleDetailsComponent implements OnInit, OnDestroy {
   dataId!: string;
   category!: string;
-  vehicleDetailsSubscription = new Subscription();
+  vehicleDetailsSubscription: Subscription | null = new Subscription();
+  httpSubscription: Subscription | null = new Subscription();
+  routeSubscription: Subscription | null = new Subscription();
   vehicleDetails!: VehicleType;
 
   constructor(
     private http: HttpClient,
     private route: ActivatedRoute,
-    private store: Store<AppState>,
+    private store: Store<AppState>
   ) { }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(data => {
+    this.routeSubscription = this.route.paramMap.subscribe((data) => {
       this.dataId = data.get('id')!;
       this.category = data.get('category')!;
-    })
+    });
 
-
-    this.vehicleDetailsSubscription = this.store.select(getVehicleDetail).subscribe((data) => {
-      if (data) {
-        this.vehicleDetails = data;
-        this.saveVisit();
-      } else {
-        this.fetchVehicleDetails();
-      }
-    })
+    this.vehicleDetailsSubscription = this.store
+      .select(getVehicleDetail)
+      .subscribe((data) => {
+        if (data) {
+          this.vehicleDetails = data;
+          this.saveVisit();
+        } else {
+          this.fetchVehicleDetails();
+        }
+      });
   }
 
   fetchVehicleDetails() {
-    this.http.get(BASE_URI + 'vehicles/' + this.dataId).subscribe((data: any) => {
-      if (data) {
-        this.store.dispatch(AppApiActions.displayVehicleDetails({ vehicle: data }))
-      }
-    })
+    this.httpSubscription = this.http
+      .get(BASE_URI + 'vehicles/' + this.dataId)
+      .subscribe((data: any) => {
+        if (data) {
+          this.store.dispatch(
+            AppApiActions.displayVehicleDetails({ vehicle: data })
+          );
+        }
+      });
   }
 
   saveVisit() {
-    this.store.dispatch(AppApiActions.updateVisitHistory({
-      history: {
-        name: this.vehicleDetails.name,
-        category: this.category as string,
-        id: parseInt(this.dataId!),
-        lastVisited: new Date()
-      }
-    }));
+    this.store.dispatch(
+      AppApiActions.updateVisitHistory({
+        history: {
+          name: this.vehicleDetails.name,
+          category: this.category as string,
+          id: parseInt(this.dataId!),
+          lastVisited: new Date(),
+        },
+      })
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.vehicleDetailsSubscription?.unsubscribe();
+    this.httpSubscription?.unsubscribe();
+    this.routeSubscription?.unsubscribe();
   }
 }

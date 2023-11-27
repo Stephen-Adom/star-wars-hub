@@ -19,10 +19,10 @@ import { AppApiActions } from 'src/shared/store/app.actions';
 export class PlanetDetailsComponent implements OnInit, OnDestroy {
   dataId!: string;
   category!: string;
-  planetDetailsSubscription = new Subscription();
+  planetDetailsSubscription: Subscription | null = new Subscription();
   planetDetails!: PlanetType;
-  routeParamSubscription = new Subscription();
-  httpSubscription = new Subscription();
+  routeParamSubscription: Subscription | null = new Subscription();
+  httpSubscription: Subscription | null = new Subscription();
 
   constructor(
     private http: HttpClient,
@@ -68,8 +68,8 @@ export class PlanetDetailsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.planetDetailsSubscription.unsubscribe();
-    this.routeParamSubscription.unsubscribe();
-    this.httpSubscription.unsubscribe();
+    this.planetDetailsSubscription?.unsubscribe();
+    this.routeParamSubscription?.unsubscribe();
+    this.httpSubscription?.unsubscribe();
   }
 }

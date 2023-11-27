@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -27,8 +27,8 @@ import { AppApiActions } from 'src/shared/store/app.actions';
   templateUrl: './details-page.component.html',
   styleUrls: ['./details-page.component.scss'],
 })
-export class DetailsPageComponent implements OnDestroy {
-  routeSubscription = new Subscription();
+export class DetailsPageComponent implements OnInit, OnDestroy {
+  routeSubscription: Subscription | null = new Subscription();
   category!: string | null;
 
 
@@ -50,5 +50,8 @@ export class DetailsPageComponent implements OnDestroy {
 
   ngOnDestroy(): void {
     this.store.dispatch(AppApiActions.clearData());
+    if (this.routeSubscription) {
+      this.routeSubscription.unsubscribe();
+    }
   }
 }

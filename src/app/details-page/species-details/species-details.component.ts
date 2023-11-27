@@ -19,12 +19,12 @@ import { AppState, getPlanetDetail, getSpeciesDetail } from 'src/shared/store/ap
 export class SpeciesDetailsComponent implements OnInit, OnDestroy {
   dataId!: string;
   category!: string;
-  speciesDetailsSubscription = new Subscription();
+  speciesDetailsSubscription: Subscription | null = new Subscription();
   speciesDetails!: SpeciesType;
   homeWorldDetails!: PlanetType;
-  routeParamSubscription = new Subscription();
-  httpSpeciesSubscription = new Subscription();
-  httpHomeworldSubscription = new Subscription();
+  routeParamSubscription: Subscription | null = new Subscription();
+  httpSpeciesSubscription: Subscription | null = new Subscription();
+  httpHomeworldSubscription: Subscription | null = new Subscription();
 
   constructor(
     private http: HttpClient,
@@ -79,9 +79,9 @@ export class SpeciesDetailsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.speciesDetailsSubscription.unsubscribe();
-    this.routeParamSubscription.unsubscribe();
-    this.httpSpeciesSubscription.unsubscribe();
-    this.httpHomeworldSubscription.unsubscribe();
+    this.speciesDetailsSubscription?.unsubscribe();
+    this.routeParamSubscription?.unsubscribe();
+    this.httpSpeciesSubscription?.unsubscribe();
+    this.httpHomeworldSubscription?.unsubscribe();
   }
 }
