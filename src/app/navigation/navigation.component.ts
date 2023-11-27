@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
-import { Observable, debounceTime, distinctUntilChanged, fromEvent, last, map, takeLast } from 'rxjs';
+import { Observable, debounceTime, distinctUntilChanged, fromEvent, map } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { BASE_URI } from 'src/shared/api.service';
 import { searchResponseType } from 'src/shared/data.types';

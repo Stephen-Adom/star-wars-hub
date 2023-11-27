@@ -1,6 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { By } from '@angular/platform-browser';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -8,6 +10,7 @@ describe('AppComponent', () => {
       imports: [
         RouterTestingModule
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
       declarations: [
         AppComponent
       ],
@@ -26,10 +29,12 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('star-wars-hub');
   });
 
-  it('should render title', () => {
+  it('should render main element', () => {
     const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('star-wars-hub app is running!');
+    const { debugElement } = fixture;
+
+    const main_element = debugElement.query(By.css('main')).nativeElement;
+
+    expect(main_element).toBeTruthy();
   });
 });

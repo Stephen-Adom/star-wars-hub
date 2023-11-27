@@ -2,7 +2,9 @@
   <div
     class="subheader w-full py-2 px-4 text-white flex items-center justify-between"
   >
-    <h5 class="text-lg" *ngIf="category">{{ category | titlecase }} Details</h5>
+    <h5 class="text-lg category-title" *ngIf="category">
+      {{ category | titlecase }} Details
+    </h5>
 
     <a href="javascript:;" (click)="goBack()" class="flex items-center gap-x-1">
       <svg

@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { CommonModule, Location, NgSwitch } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { Table, TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -17,7 +17,6 @@ import {
 import { Store } from '@ngrx/store';
 import { AppApiActions } from 'src/shared/store/app.actions';
 import { LazyLoadEvent } from 'primeng/api';
-import { FilmType, PeopleType } from 'src/shared/data.types';
 import { format } from 'date-fns';
 import { BASE_URI } from 'src/shared/api.service';
 
@@ -469,7 +468,6 @@ export class ListerPageComponent implements OnInit, OnDestroy {
     }
     const id = info.url.split(BASE_URI + this.category + '/')[1].split('/')[0];
     this.router.navigate([this.category, 'details', id]);
-    console.log(info);
   }
 
   ngOnDestroy(): void {

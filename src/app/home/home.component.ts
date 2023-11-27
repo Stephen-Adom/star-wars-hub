@@ -88,12 +88,7 @@ export class HomeComponent implements AfterViewInit {
         },
       },
     };
-
-    // now we need to assign all parameters to Swiper element
     Object.assign(this.swiperContainer.nativeElement, swiperParams);
-
-    console.log(this.swiperContainer);
-    // and now initialize it
     this.swiperContainer.nativeElement.initialize();
 
   }

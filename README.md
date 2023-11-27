@@ -25,11 +25,6 @@
 
 Explore the Star Wars universe with our information-packed website. From characters to planets and starships, delve into detailed insights seamlessly
 
-<div style="display: flex; align-items: center;">
-<img src="./assets/screenshots/1.png" height="500px" />
-<img src="./assets/screenshots/2.png" height="500px" />
-<img src="./assets/screenshots/3.png" height="500px" />
-</div>
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Built With
